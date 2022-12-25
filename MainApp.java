@@ -9,7 +9,7 @@ public class MainApp {
 
         Portal s = new StudentPortal();
         boolean a=true;
-        System.out.println("Welcome to student portal!!!!!");
+        System.out.println("Welcome to student portal!!!!");
         while (a) {
             System.out.println("""
                 1.SIGN UP
