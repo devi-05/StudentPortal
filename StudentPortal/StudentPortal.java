@@ -22,7 +22,7 @@ public class StudentPortal implements Portal {
         profile.createProfile(ac.createAccount(mailId));
         System.out.println("do you want to continue(y/n)");
         if(Verification.yesOrNoVerification().equals("y")){
-            menuObj.menu(mailId);
+            signIn();
         }
     }
 
