@@ -21,7 +21,7 @@ public class PaymentService {
                 2.DEBIT CARD
                 3.CREDIT CARD
                 4.NET BANKING""");
-            List<PaymentConvenienceFees>paymentConvenienceFees= Arrays.asList(PaymentConvenienceFees.values());
+        List<PaymentConvenienceFees>paymentConvenienceFees= Arrays.asList(PaymentConvenienceFees.values());
         int preference= Verification.inputVerification(4);
         double convenienceFeesPercent;
         double convenienceFees = 0;
@@ -39,15 +39,12 @@ public class PaymentService {
             case 4 -> {modeOfPayment = paymentConvenienceFees.get(3);
                 convenienceFeesPercent=modeOfPayment.getPercentExtra();
                 convenienceFees=((convenienceFeesPercent*db.getTotalFees(mailId))/100);}
-            default -> {
-                System.out.println("enter valid options");
-            }
         }
             System.out.println("Payment bill:");
             System.out.println("Mode of joining fees : "+db.getModeOfJoiningFees(mailId)+"\nResidential fees : "+db.getResidentialStatusFees(mailId)+"\nTransport fees : "+db.getTransportFees(mailId)+"\n Miscellaneous fees : "+db.getMiscellaneousFees(mailId)+"\nconvenience fees : "+convenienceFees);
             System.out.println("--------------------------------------------------------");
             System.out.println("Total fees : "+(db.getModeOfJoiningFees(mailId)+db.getResidentialStatusFees(mailId)+db.getMiscellaneousFees(mailId)+db.getTransportFees(mailId)+convenienceFees));
-         System.out.println("enter amount to pay(HINT: AMOUNT SHOULD BE MINIMUM 100RS )");
+         System.out.println(" enter amount to pay(HINT: AMOUNT SHOULD BE MINIMUM 100RS) ");
         long amount= Verification.amountVerification();
         feesTobePaid= (long) (db.getModeOfJoiningFees(mailId)+db.getResidentialStatusFees(mailId)+db.getMiscellaneousFees(mailId)+db.getTransportFees(mailId)+convenienceFees);
         feesTobePaid-=amount;

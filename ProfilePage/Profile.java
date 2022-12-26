@@ -96,8 +96,7 @@ public class Profile {
         System.out.println(db.getUserData(mailId));
     }
     public void editProfile(String mailId) throws IOException {
-        boolean flag = true;
-        while (flag) {
+        editProfileMenuLoop : while (true) {
             System.out.println("choose category which u want to edit:");
             System.out.println("""
                     1.address
@@ -118,7 +117,7 @@ public class Profile {
                     db.editData(mailId, attribute, newPhoneNumber);
                     break;
                 case 3:
-                    flag = false;
+                    break editProfileMenuLoop;
 
             }
         }

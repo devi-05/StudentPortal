@@ -7,7 +7,6 @@ import java.util.*;
 
 public class ResultGenerator {
     Database db=Database.getInstance();
-    Map<Integer, Double> totalGradePoints=new HashMap<>();
     public void addResults(String mailId) {
         List<String> Subjects = new ArrayList<>();
         List<Integer> Credits = new ArrayList<>();
@@ -52,7 +51,6 @@ public class ResultGenerator {
             for (int i = 0; i < GradePoints.size(); i++) {
                 grade += GradePoints.get(i);
             }
-            //totalGradePoints.put(semNum, grade);
             db.addTotalCreditWithGrades(mailId, semNum,grade);
             Formatter fmt = new Formatter();
             fmt.format("%17s%17s%17s\n", "subjects", "credits", "grades");
@@ -68,7 +66,7 @@ public class ResultGenerator {
                 addResults(mailId);
             }
     }
-        public void CalculateCgpa (String mailId) {
+        public void calculateCgpa(String mailId) {
                 double cgpaTotalCredits = db.getTotalCredits(mailId);
                 double cgpaTotalGradePoints = db.getTotalGradePoints(mailId);
                 double cgpa = cgpaTotalGradePoints / cgpaTotalCredits;

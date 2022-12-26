@@ -72,7 +72,7 @@ public class ExamResultManagement {
                 System.out.println("student doesn't exist");
             } else {
                 if (db.getEntireSemResult(mailId) != null) {
-                    resultGenerator.CalculateCgpa(mailId);
+                    resultGenerator.calculateCgpa(mailId);
                     System.out.println(db.getCgpa(mailId));
                 } else {
                     System.out.println("results are not updated");
