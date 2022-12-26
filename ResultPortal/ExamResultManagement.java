@@ -67,13 +67,18 @@ public class ExamResultManagement {
     public void  retrieveCgpa(){
         System.out.println("enter mail id:");
         String mailId = Verification.mailVerification();
-        if(Verification.getUser(mailId).equals("edu")){
-        if (!db.getId(mailId)){
-            System.out.println("student doesn't exist");}
-        else {
-        resultGenerator.CalculateCgpa(mailId);
-        System.out.println(db.getCgpa(mailId));}
-    }
+        if(Verification.getUser(mailId).equals("edu")) {
+            if (!db.getId(mailId)) {
+                System.out.println("student doesn't exist");
+            } else {
+                if (db.getEntireSemResult(mailId) != null) {
+                    resultGenerator.CalculateCgpa(mailId);
+                    System.out.println(db.getCgpa(mailId));
+                } else {
+                    System.out.println("results are not updated");
+                }
+            }
+        }
         else {
             System.out.println("enter student mailId");
         }

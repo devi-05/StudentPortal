@@ -61,7 +61,6 @@ public class ResultGenerator {
             }
             db.addEntireSemResults(mailId, semNum,fmt);
             double gpa = (grade) / ((double) totalCreditsSum);
-                System.out.println(gpa);
             db.addGpa(mailId, semNum,Double.parseDouble(String.format("%.2f", gpa)));
         }
             else {
@@ -69,12 +68,12 @@ public class ResultGenerator {
                 addResults(mailId);
             }
     }
-        public void CalculateCgpa (String mailId){
-        //TODO get
-            double cgpaTotalCredits = db.getTotalCredits(mailId);
-            double cgpaTotalGradePoints = db.getTotalGradePoints(mailId);
-            double cgpa = cgpaTotalGradePoints / cgpaTotalCredits;
-            db.addCgpa(mailId, Double.parseDouble(String.format("%.2f", cgpa)));
+        public void CalculateCgpa (String mailId) {
+                double cgpaTotalCredits = db.getTotalCredits(mailId);
+                double cgpaTotalGradePoints = db.getTotalGradePoints(mailId);
+                double cgpa = cgpaTotalGradePoints / cgpaTotalCredits;
+                db.addCgpa(mailId, Double.parseDouble(String.format("%.2f", cgpa)));
+
         }
         public Formatter semResult (String mailId, int semNumber){
             return db.getSemResult(mailId, semNumber);
