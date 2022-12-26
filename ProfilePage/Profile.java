@@ -1,6 +1,7 @@
 package ProfilePage;
 
 import AccountService.Account;
+import Menu.MainMenu;
 import PortalDatabase.Database;
 import PortalUsers.*;
 import Verification.Verification;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Profile {
     Database db=Database.getInstance();
     Account ac=new Account();
+    MainMenu menuObj=new MainMenu();
     public void createProfile(String mailId) throws IOException {
         if(mailId!=null) {
             System.out.println("enter your details to create your profile");
@@ -84,6 +86,10 @@ public class Profile {
                 db.addNewAdmin(mailId, newAdmin);
             }
             System.out.println("created ur profile successfully");
+            System.out.println("do you want to continue(y/n)");
+            if(Verification.yesOrNoVerification().equals("y")){
+                menuObj.menu(mailId);
+            }
         }
 
     }

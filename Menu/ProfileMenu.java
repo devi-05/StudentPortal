@@ -10,12 +10,17 @@ public class ProfileMenu {
     Database db=Database.getInstance();
     public void profileOption(String mailId,String user) throws IOException {
         Profile profile=new Profile();
+
         if (user.equals("edu")) {
-            System.out.println("1.view profile" + "\n2.edit profile");
-            int input = Verification.inputVerification(2);
-            switch (input) {
-                case 1 -> profile.viewProfile(mailId, user);
-                case 2 -> profile.editProfile(mailId, user);
+            boolean a= true;
+            while (a) {
+                System.out.println("1.view profile" + "\n2.edit profile" + "\n3.back");
+                int input = Verification.inputVerification(3);
+                switch (input) {
+                    case 1 -> profile.viewProfile(mailId, user);
+                    case 2 -> profile.editProfile(mailId, user);
+                    case 3 -> a=false;
+                }
             }
         } else {
             boolean p = true;

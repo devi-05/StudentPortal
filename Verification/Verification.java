@@ -42,7 +42,7 @@ public class Verification {
 
     public static String nameVerification(){
         String name=s.next();
-        if(name.matches("[A-Z][a-z]+[-.]?[A-Za-z]{1,10}")){
+        if(name.matches("[A-Z][a-z]+[-.][A-Za-z]{1,10}")){
             return name;
         }
         else {

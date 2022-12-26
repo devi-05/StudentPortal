@@ -7,8 +7,6 @@ import ProfilePage.Profile;
 import Verification.Verification;
 
 import java.io.IOException;
-import java.util.Objects;
-
 
 public class StudentPortal implements Portal {
     Database db=Database.getInstance();
@@ -20,17 +18,13 @@ public class StudentPortal implements Portal {
         System.out.println("enter mailId: ");
         String mailId= Verification.mailVerification();
         profile.createProfile(ac.createAccount(mailId));
-        System.out.println("do you want to continue(y/n)");
-        if(Verification.yesOrNoVerification().equals("y")){
-            signIn();
-        }
     }
 
     @Override
     public void signIn() throws IOException {
         System.out.println("enter mailID:");
         String mailId = Verification.mailVerification();
-        String setStatus = null;
+        String setStatus = "";
         while (!db.getId(mailId)) {
             System.out.println("MailId doesn't exists!!!enter registered mailId :");
             System.out.println("do u want to continue (y/n)");
@@ -41,7 +35,7 @@ public class StudentPortal implements Portal {
             System.out.println("enter mailId:");
             mailId = Verification.mailVerification();
         }
-        if (!Objects.equals(setStatus, "No")) {
+        if (!setStatus.equals("No")) {
             System.out.println("enter ur password");
             String signInPassword = Verification.passwordVerification();
             String password = db.getPassword(mailId);
