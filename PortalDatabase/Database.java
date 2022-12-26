@@ -3,6 +3,7 @@ package PortalDatabase;
 import PortalUsers.Admin;
 import ProfilePage.Department;
 import PortalUsers.Student;
+import Verification.Verification;
 
 import java.util.*;
 
@@ -50,16 +51,16 @@ public class Database {
         return mailAndPassword.get(mailId);
     }
 
-    public Object getUserData(String user, String mailId) {
-        if (user.equals("edu")) {
+    public Object getUserData( String mailId) {
+        if (Verification.getUserAsStudent(mailId)) {
             return studentDetails.get(mailId);
         } else {
             return adminDetails.get(mailId);
         }
     }
 
-    public void editData(String user, String mailId, String attribute, String newInput) {
-        if (user.equals("edu")) {
+    public void editData( String mailId, String attribute, String newInput) {
+        if (Verification.getUserAsStudent(mailId)) {
             if (attribute.equals("address")) {
                 studentDetails.get(mailId).setAddress(newInput);
             } else if (attribute.equals("phoneNumber")) {

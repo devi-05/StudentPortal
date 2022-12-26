@@ -4,9 +4,9 @@ import ResultPortal.ExamResultManagement;
 import Verification.Verification;
 
 public class Result {
-    public void results(String mailId,String user) {
+    public void results(String mailId) {
         ExamResultManagement resultManagement= new ExamResultManagement();
-        if ((user.equals("admin"))) {
+        if (!Verification.getUserAsStudent(mailId)) {
             System.out.println("""
                     1.add result
                     2.view semester result

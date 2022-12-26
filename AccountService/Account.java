@@ -5,7 +5,7 @@ import Verification.Verification;
 
 public class Account {
    Database db=Database.getInstance();
-   private String mailId;
+//   private String mailId;
    private String password;
     public String createAccount(String mailId){
 

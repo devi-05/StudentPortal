@@ -9,8 +9,8 @@ import java.util.List;
 public class PaymentService {
     Database db=Database.getInstance();
     public void pay(String mailId){
-        String user= Verification.getUser(mailId);
-        if(user.equals("edu")){
+        boolean user= Verification.getUserAsStudent(mailId);
+        if(user){
             long feesTobePaid=db.getTotalFees(mailId);
             long feesPaid= db.getFeesPaid(mailId);
             System.out.println("fees to be paid : "+feesTobePaid);
@@ -61,10 +61,8 @@ public class PaymentService {
         getReceipt(mailId,db.getName(mailId),db.getRollNum(mailId),db.getDepartment(mailId),db.getFeesPaid(mailId),db.getTotalFees(mailId),amount,modeOfPayment);
 
     }}
-    public void viewBalance(){
-        System.out.println("enter mailId:");
-        String mailId= Verification.mailVerification();
-        if(!Verification.getUser(mailId).equals("edu")){
+    public void viewBalance(String mailId){
+        if(!Verification.getUserAsStudent(mailId)){
             System.out.println("enter student mail id:");
             mailId=Verification.mailVerification();
         }

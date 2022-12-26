@@ -6,7 +6,6 @@ import java.io.IOException;
 
 public class MainMenu {
     public void menu(String mailId) throws IOException {
-        String user = Verification.getUser(mailId);
         boolean a = true;
         while (a) {
             System.out.println("enter ur preference in sign in page");
@@ -20,17 +19,17 @@ public class MainMenu {
                 case 1 -> {
                     System.out.println("welcome to profile page");
                     ProfileMenu profile = new ProfileMenu();
-                    profile.profileOption(mailId, user);
+                    profile.profileOption(mailId);
                 }
                 case 2 -> {
                     System.out.println("welcome to fee portal");
                     Fees fees = new Fees();
-                    fees.payService(mailId, user);
+                    fees.payService(mailId);
                 }
                 case 3 -> {
                     System.out.println("welcome to result portal");
                     Result result = new Result();
-                    result.results(mailId, user);
+                    result.results(mailId);
                 }
                 case 4 -> {
                     SignOut();

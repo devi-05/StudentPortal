@@ -9,7 +9,7 @@ public class ExamResultManagement {
     public void addResult(){
         System.out.println("enter mailId");
         String mailId = Verification.mailVerification();
-        if(Verification.getUser(mailId).equals("edu")) {
+        if(Verification.getUserAsStudent(mailId)) {
             if (!db.getId(mailId)) {
                 System.out.println("student doesn't exist");
             } else {
@@ -24,7 +24,7 @@ public class ExamResultManagement {
     public void viewCurrentSemResults(){
         System.out.println("enter mailId");
         String mailId = Verification.mailVerification();
-        if(Verification.getUser(mailId).equals("edu")){
+        if(Verification.getUserAsStudent(mailId)){
         if (!db.getId(mailId)){
             System.out.println("student doesn't exist");}
         else {
@@ -46,7 +46,7 @@ public class ExamResultManagement {
 
         System.out.println("enter mailId:");
         String mailId = Verification.mailVerification();
-        if(Verification.getUser(mailId).equals("edu")) {
+        if(Verification.getUserAsStudent(mailId)) {
             if (!db.getId(mailId)) {
                 System.out.println("student doesn't exist");
             } else {
@@ -67,7 +67,7 @@ public class ExamResultManagement {
     public void  retrieveCgpa(){
         System.out.println("enter mail id:");
         String mailId = Verification.mailVerification();
-        if(Verification.getUser(mailId).equals("edu")) {
+        if(Verification.getUserAsStudent(mailId)) {
             if (!db.getId(mailId)) {
                 System.out.println("student doesn't exist");
             } else {

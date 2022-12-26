@@ -17,11 +17,11 @@ public class Verification {
 
     public static String mailVerification(){
         String mailId=s.next();
-        if(mailId.matches("[a-z0-9.]+@(edu|admin).in")){
+        if(mailId.matches("[a-z0-9.]+@(student|admin).in")){
             return mailId;
         }
         else {
-            System.out.println("enter mail id which contains alphanumeric characters and special character(.) is included and ends with edu or admin .in");
+            System.out.println("enter mail id which contains alphanumeric characters and special character(.) is included and ends with student or admin .in");
             return mailVerification();
         }
     }
@@ -35,9 +35,9 @@ public class Verification {
             return passwordVerification();
         }
     }
-    public static String getUser(String mailId){
+    public static boolean getUserAsStudent(String mailId){
         String splitter=mailId.split("@")[1];
-        return splitter.split("\\.")[0];
+        return splitter.split("\\.")[0].equals("student");
     }
 
     public static String nameVerification(){
@@ -66,7 +66,7 @@ public class Verification {
         if (input.matches("[A-Za-z\s,-.0-9]{5,25}")) {
             return input;
         } else {
-            System.out.println("enter proper address with pin code");
+            System.out.println("enter proper address with at least 5 to 25 alphanumeric characters");
             return addressVerification();
         }
     }
@@ -145,9 +145,6 @@ public class Verification {
             return amountVerification();
         }
     }
-
-
-
     public static String yesOrNoVerification(){
         String input=s.next();
         if(input.matches("[y|n]")){

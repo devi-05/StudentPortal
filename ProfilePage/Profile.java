@@ -36,8 +36,7 @@ public class Profile {
             int bg = Verification.inputVerification(7);
             List<BloodGroup> bgList = Arrays.asList(BloodGroup.values());
             BloodGroup bloodGroup = bgList.get(bg-1);
-            String user = Verification.getUser(mailId);
-            if (user.equals("edu")) {
+            if (Verification.getUserAsStudent(mailId)) {
                 String rollNumber = "s" + rollNum++;
                 System.out.println("enter any alphabet a to l to choose ur department");
                 System.out.println("""
@@ -78,7 +77,7 @@ public class Profile {
                 long feesPaid = 0;
                 Student newStudent = new Student(mailId, name, bloodGroup, address, phoneNumber, rollNumber, department, joiningYear, modeOfJoining, residentialStatus,modeOfJoining.getFees(),residentialStatus.getFees(), transportFees,miscellaneousFees,totalFees, feesPaid);
                 db.addNewStudent(mailId, newStudent);
-            } else if (user.equals("admin")) {
+            } else  {
                 String employeeId = "A" + rollNum++;
                 System.out.println("enter date of joining[format:dd-month-yyyy,eg:09-jun-2022]");
                 String dateOfJoining = Verification.empDojVerification();
@@ -86,37 +85,43 @@ public class Profile {
                 db.addNewAdmin(mailId, newAdmin);
             }
             System.out.println("created ur profile successfully");
-            System.out.println("do you want to continue(y/n)");
+            System.out.println("do you want to continue and move to menu page(y/n)");
             if(Verification.yesOrNoVerification().equals("y")){
                 menuObj.menu(mailId);
             }
         }
 
     }
-    public void viewProfile(String mailId,String user){
+    public void viewProfile(String mailId){
 
-        System.out.println(db.getUserData(user,mailId));
+        System.out.println(db.getUserData(mailId));
     }
-    public void editProfile(String mailId,String user) throws IOException {
-        System.out.println("choose category which u want to edit:");
-        System.out.println("1.address"+"\n2.phone Number");
-        int preference=Verification.inputVerification(2);
-        switch (preference) {
-            case 1:
-                String attribute="address";
-                System.out.println("enter ur new address");
-                String newAddress=Verification.addressVerification();
-                db.editData(user,mailId, attribute,newAddress);
-                break;
-            case 2:
-                 attribute="phoneNumber";
-                System.out.println("enter ur new phone number");
-                String newPhoneNumber=Verification.phoneNumVerification();
-                db.editData(user,mailId, attribute,newPhoneNumber);
-                break;
+    public void editProfile(String mailId) throws IOException {
+        boolean flag = true;
+        while (flag) {
+            System.out.println("choose category which u want to edit:");
+            System.out.println("""
+                    1.address
+                    2.phone Number
+                    3.back to menu page""");
+            int preference = Verification.inputVerification(2);
+            switch (preference) {
+                case 1:
+                    String attribute = "address";
+                    System.out.println("enter ur new address");
+                    String newAddress = Verification.addressVerification();
+                    db.editData(mailId, attribute, newAddress);
+                    break;
+                case 2:
+                    attribute = "phoneNumber";
+                    System.out.println("enter ur new phone number");
+                    String newPhoneNumber = Verification.phoneNumVerification();
+                    db.editData(mailId, attribute, newPhoneNumber);
+                    break;
+                case 3:
+                    flag = false;
 
-
+            }
         }
     }
-
 }
