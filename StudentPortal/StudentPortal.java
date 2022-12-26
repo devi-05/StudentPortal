@@ -15,7 +15,7 @@ public class StudentPortal implements Portal {
     MainMenu menuObj=new MainMenu();
     @Override
     public void signUp() throws IOException {
-        System.out.println("enter mailId ( student : [name@student.in] || Admin : [name@admin.in] ");
+        System.out.println("enter mailId ( student : [name@student.in] || Admin : [name@admin.in] )");
         String mailId= Verification.mailVerification();
         profile.createProfile(ac.createAccount(mailId));
     }
