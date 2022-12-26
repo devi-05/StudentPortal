@@ -72,26 +72,11 @@ public class Verification {
     }
 
 
-    public static int yearVerification() {
-        String input = s.next();
-        if (input.matches("[1-9][0-9]{3}")) {
+    public static int StudentJoiningYear() {
             LocalDate date = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
             String formattedYear = date.format(formatter);
-            if (input.equals(formattedYear)) {
-                return Integer.parseInt(input);
-            } else if (Integer.parseInt(input) > Integer.parseInt(formattedYear)) {
-                System.out.println("entered year is beyond current year");
-                return yearVerification();
-            } else  {
-                System.out.println("entered year is less than current year");
-                return yearVerification();
-            }
-        } else {
-            System.out.println("enter 4 digit num");
-            return yearVerification();
-        }
-
+            return Integer.parseInt(formattedYear);
     }
 
     public static String empDojVerification() {

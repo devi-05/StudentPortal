@@ -55,8 +55,7 @@ public class Profile {
                 int dept = Verification.inputVerification(12);
                 List<Department> deptList = Arrays.asList(Department.values());
                 Department department = deptList.get(dept-1);
-                System.out.println("enter your joining year eg:2019");
-                int joiningYear = Verification.yearVerification();
+                int joiningYear = Verification.StudentJoiningYear();
                 long transportFees = 40000;
                 long miscellaneousFees = 45000;
                 long totalFees = transportFees + miscellaneousFees;
