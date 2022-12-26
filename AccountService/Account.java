@@ -11,6 +11,7 @@ public class Account {
 
         if(db.getId(mailId)){
             System.out.println("already existing user");
+            System.out.println("please sign in!!!!");
         }
         else{
             System.out.println("enter password: ");
