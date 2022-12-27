@@ -14,7 +14,10 @@ public class ProfileMenu {
         if (Verification.getUserAsStudent(mailId)) {
             studentProfilePageMenuLoop:
             while (true) {
-                System.out.println("1.view profile" + "\n2.edit profile" + "\n3.back to menu page");
+                System.out.println("""
+                        1.view profile
+                        2.edit profile
+                        3.back to menu page""");
                 int input = Verification.inputVerification(3);
                 switch (input) {
                     case 1 -> profile.viewProfile(mailId);
