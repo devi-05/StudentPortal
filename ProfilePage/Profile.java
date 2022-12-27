@@ -74,7 +74,7 @@ public class Profile {
                 db.addNewStudent(mailId, newStudent);
             } else {
                 String employeeId = "A" + rollNum++;
-                System.out.println("enter date of joining[format:dd-month-yyyy,eg:09-jun-2022]");
+                System.out.println("enter date of joining[format:dd-MMM-yyyy,eg:09-jun-2022]");
                 String dateOfJoining = Verification.empDojVerification();
                 Admin newAdmin = new Admin(mailId, name, bloodGroup, address, phoneNumber, employeeId, dateOfJoining);
                 db.addNewAdmin(mailId, newAdmin);
@@ -101,7 +101,7 @@ public class Profile {
                     1.address
                     2.phone Number
                     3.back to menu page""");
-            int preference = Verification.inputVerification(2);
+            int preference = Verification.inputVerification(3);
             switch (preference) {
                 case 1:
                     String attribute = "address";

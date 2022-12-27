@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Verification {
@@ -22,10 +24,10 @@ public class Verification {
 
     public static String passwordVerification() {
         String password = s.next();
-        if (password.matches("[A-Za-z1-9@]{2,6}")) {
+        if (password.matches("[A-Za-z1-9@]{2,15}")) {
             return password;
         } else {
-            System.out.println("enter password using alphanumeric characters and special character (@) is allowed and it should be between 2 to 6 characters");
+            System.out.println("enter password using alphanumeric characters and special character (@) is allowed and it should be between 2 to 15 characters");
             return passwordVerification();
         }
     }
@@ -37,10 +39,10 @@ public class Verification {
 
     public static String nameVerification() {
         String name = s.next();
-        if (name.matches("[A-Z][a-z]+[-.][A-Za-z]{1,10}")) {
-            return name;
+        if (name.matches("[A-Z][a-z]+[-.][A-Za-z]{1,15}")) {
+            return name.substring(0,1).toUpperCase()+name.substring(1);
         } else {
-            System.out.println("name should contain 5 to 15 alphabets and starting letter should be in caps!!!!");
+            System.out.println("name should be in above format and should contain 5 to 15 alphabets !!!!");
             return nameVerification();
         }
     }
@@ -59,10 +61,10 @@ public class Verification {
     public static String addressVerification() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String input = bufferedReader.readLine();
-        if (input.matches("[A-Za-z\s,-.0-9]{5,25}")) {
+        if (input.matches("[A-Za-z\s,-.0-9]{5,50}")) {
             return input;
         } else {
-            System.out.println("enter proper address with at least 5 to 25 alphanumeric characters");
+            System.out.println("enter proper address with at least 5 to 50 alphanumeric characters");
             return addressVerification();
         }
     }
@@ -77,32 +79,29 @@ public class Verification {
 
     public static String empDojVerification() {
         String input = s.next();
+        List<String>monthsWithThirtyOneDaysList= Arrays.asList("JAN", "MAR", "MAY", "JUL", "AUG", "OCT", "DEC");
+        List<String>monthsWithThirtyDaysList= Arrays.asList("APR","JUN","SEP","NOV");
         if (input.matches("([0-9]{1,2}-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-[1-2][0-9]{3})")) {
-            String[] splittedEmpdoj = input.split("-");
-            int number = 0;
-            String string = (splittedEmpdoj[1].toUpperCase());
-            switch (string) {
-                case "JAN" -> number = Months.JAN.getDays();
-                case "FEB" -> number = Months.FEB.getDays();
-                case "MAR" -> number = Months.MAR.getDays();
-                case "APR" -> number = Months.APR.getDays();
-                case "MAY" -> number = Months.MAY.getDays();
-                case "JUN" -> number = Months.JUN.getDays();
-                case "JUL" -> number = Months.JUL.getDays();
-                case "AUG" -> number = Months.AUG.getDays();
-                case "SEP" -> number = Months.SEP.getDays();
-                case "OCT" -> number = Months.OCT.getDays();
-                case "NOV" -> number = Months.NOV.getDays();
-                case "DEC" -> number = Months.DEC.getDays();
+            String[] splitEmpDoj = input.split("-");
+            int number ;
+            String string = (splitEmpDoj[1].toUpperCase());
+            if(monthsWithThirtyOneDaysList.contains(string)){
+                number=31;
+            }
+            else if (monthsWithThirtyDaysList.contains(string)){
+                number=30;
+            }
+            else {
+                number=29;
             }
             LocalDate date = LocalDate.now();
             DateTimeFormatter formatterYear = DateTimeFormatter.ofPattern("yyyy");
             String formattedYear = date.format(formatterYear);
-            if (number < Integer.parseInt(splittedEmpdoj[0])) {
+            if (number < Integer.parseInt(splitEmpDoj[0])) {
                 System.out.println("enter correct date");
                 return empDojVerification();
             }
-            if (Integer.parseInt(splittedEmpdoj[2]) > Integer.parseInt(formattedYear)) {
+            if (Integer.parseInt(splitEmpDoj[2]) > Integer.parseInt(formattedYear)) {
                 System.out.println("entered year is beyond current date");
                 return empDojVerification();
             }

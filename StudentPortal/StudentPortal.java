@@ -28,7 +28,7 @@ public class StudentPortal implements Portal {
         String setStatus = "";
         while (!db.getId(mailId)) {
             System.out.println("MailId doesn't exists!!!enter registered mailId :");
-            System.out.println("do u want to continue (y/n)");
+            System.out.println("do u want to continue in sign in page (y/n)");
             if (Verification.yesOrNoVerification().equals("n")) {
                 setStatus = "No";
                 break;
