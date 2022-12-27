@@ -128,7 +128,7 @@ public class Verification {
         if (input.matches("[y|n]")) {
             return input;
         } else {
-            System.out.println("enter input y or n)");
+            System.out.println("enter input y or n");
             return yesOrNoVerification();
         }
     }

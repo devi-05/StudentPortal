@@ -28,7 +28,7 @@ public class ProfileMenu {
             adminProfilePageMenuLoop:
             while (true) {
                 System.out.println("""
-                        1.view profile
+                        1.view own profile
                         2.edit profile
                         3.view student profile
                         4.Back to menu page""");
