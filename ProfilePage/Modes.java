@@ -2,8 +2,8 @@ package ProfilePage;
 
 public enum Modes {
 
-    counselling(50000),
-    management(100000);
+    COUNSELING(50000),
+    MANAGEMENT(100000);
 
     private final int fees;
 

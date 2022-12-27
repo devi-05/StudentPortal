@@ -51,7 +51,7 @@ public class Database {
     }
 
     public Object getUserData(String mailId) {
-        if (Verification.getUserAsStudent(mailId)) {
+        if (Verification.isStudent(mailId)) {
             return studentDetails.get(mailId);
         } else {
             return adminDetails.get(mailId);
@@ -59,7 +59,7 @@ public class Database {
     }
 
     public void editData(String mailId, String attribute, String newInput) {
-        if (Verification.getUserAsStudent(mailId)) {
+        if (Verification.isStudent(mailId)) {
             if (attribute.equals("address")) {
                 studentDetails.get(mailId).setAddress(newInput);
             } else if (attribute.equals("phoneNumber")) {

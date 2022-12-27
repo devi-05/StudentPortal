@@ -3,10 +3,7 @@ package ResultPortal;
 import PortalDatabase.Database;
 import Verification.Verification;
 
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ResultGenerator {
     Database db = Database.getInstance();
@@ -44,10 +41,12 @@ public class ResultGenerator {
                 totalCreditsSum += subCredit;
                 Credits.add(subCredit);
                 System.out.println("enter grades:");
-                System.out.println("1.O   2.A   3.B   4.C   5.D");
-                int grade = Verification.inputVerification(5);
-                Grades.add(GradeValues.values()[grade - 1]);
-                GradePoints.add((double) (subCredit * GradeValues.values()[grade - 1].getPoint()));
+                List<String>gradeList= Arrays.asList("O","A","B","C","D");
+                Verification.printOptions(gradeList);
+                int gradePreference = Verification.inputVerification(5);
+                String grades=gradeList.get(gradePreference-1);
+                Grades.add(GradeValues.valueOf(grades));
+                GradePoints.add((double) (subCredit * GradeValues.valueOf(grades).getPoint()));
             }
             db.addTotalCredits(mailId, semNum, totalCreditsSum);
             double grade = 0;

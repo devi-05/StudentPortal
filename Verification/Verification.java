@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class Verification {
@@ -30,7 +31,7 @@ public class Verification {
         }
     }
 
-    public static boolean getUserAsStudent(String mailId) {
+    public static boolean isStudent(String mailId) {
         String splitter = mailId.split("@")[1];
         return splitter.split("\\.")[0].equals("student");
     }
@@ -151,6 +152,11 @@ public class Verification {
             return inputVerification(noOfOptions);
         }
 
+    }
+    public static void printOptions(List list){
+        for (int i=0;i<list.size();i++){
+            System.out.println((i+1)+"."+list.get(i));
+        }
     }
 
 

@@ -6,7 +6,7 @@ import Verification.Verification;
 public class Fees {
     public void payService(String mailId) {
         PaymentService payService = new PaymentService();
-        if (Verification.getUserAsStudent(mailId)) {
+        if (Verification.isStudent(mailId)) {
             studentFeePageMenuLoop:
             while (true) {
                 System.out.println("""

@@ -8,6 +8,4 @@ public enum BloodGroup {
     B_positive,
     B_negative,
     AB_negative;
-
-
 }

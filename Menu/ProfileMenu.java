@@ -11,7 +11,7 @@ public class ProfileMenu {
 
     public void profileOption(String mailId) throws IOException {
         Profile profile = new Profile();
-        if (Verification.getUserAsStudent(mailId)) {
+        if (Verification.isStudent(mailId)) {
             studentProfilePageMenuLoop:
             while (true) {
                 System.out.println("""
@@ -43,7 +43,7 @@ public class ProfileMenu {
                         System.out.println("enter student mailID:");
                         String studentMailId = Verification.mailVerification();
 
-                        if (!Verification.getUserAsStudent(studentMailId)) {
+                        if (!Verification.isStudent(studentMailId)) {
                             System.out.println("enter student mailId");
                             studentMailId = Verification.mailVerification();
                         }

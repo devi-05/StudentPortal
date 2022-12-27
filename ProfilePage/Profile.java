@@ -10,6 +10,8 @@ import Verification.Verification;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 public class Profile {
     Database db = Database.getInstance();
@@ -27,49 +29,36 @@ public class Profile {
             System.out.println("enter address");
             String address = Verification.addressVerification();
             System.out.println("enter blood group:");
-            System.out.println("""
-                    1.O_positive
-                    2.O_negative
-                    3.A_positive
-                    4.A_negative
-                    5.B_positive
-                    6.B_negative
-                    7.AB_negative""");
+            List<String>bloodGroupList= Arrays.asList("O_positive", "O_negative","A_positive","A_negative", "B_positive", "B_negative", "AB_negative");
+            Verification.printOptions(bloodGroupList);
             int bloodGroupPreference = Verification.inputVerification(7);
-            BloodGroup bloodGroup = BloodGroup.values()[bloodGroupPreference - 1];
-            if (Verification.getUserAsStudent(mailId)) {
+            String bloodGrpPreference=bloodGroupList.get(bloodGroupPreference-1);
+            BloodGroup bloodGroup = BloodGroup.valueOf(bloodGrpPreference);
+            if (Verification.isStudent(mailId)) {
                 String rollNumber = "s" + rollNum++;
-                System.out.println("enter any alphabet a to l to choose ur department");
-                System.out.println("""
-                        1)MECHANICAL,
-                        2)CIVIL,
-                        3)ECE,
-                        4)EEE,
-                        5)AUTO_MOBILE,
-                        6)CHEMICAL,
-                        7)MECHATRONICS,
-                        8)BIOTECHNOLOGY,
-                        9)BIOMEDICAL,
-                        10)FOOD_TECHNOLOGY,
-                        11)COMPUTER_SCIENCE,
-                        12)INFORMATION_TECHNOLOGY;""");
-                int dept = Verification.inputVerification(12);
-                Department department = Department.values()[dept - 1];
+                System.out.println("enter department :");
+                List<String>departmentList= Arrays.asList("MECHANICAL", "CIVIL","ECE","EEE", "AUTO_MOBILE", "CHEMICAL", "MECHATRONICS","BIOTECHNOLOGY","BIOMEDICAL","FOOD_TECHNOLOGY","COMPUTER_SCIENCE","INFORMATION_TECHNOLOGY");
+                Verification.printOptions(departmentList);
+                int deptOption = Verification.inputVerification(12);
+                String dept=departmentList.get(deptOption-1);
+                Department department = Department.valueOf(dept);
                 int joiningYear = Verification.StudentJoiningYear();
                 long transportFees = 40000;
                 long miscellaneousFees = 45000;
                 long totalFees = transportFees + miscellaneousFees;
+                List<String>modeOfJoiningList= Arrays.asList("COUNSELING", "MANAGEMENT");
                 System.out.println("enter mode of joining:");
-                System.out.println("""
-                        1)COUNSELING
-                        2)MANAGEMENT""");
+                Verification.printOptions(modeOfJoiningList);
                 int modePreference = Verification.inputVerification(2);
-                Modes modeOfJoining = Modes.values()[modePreference - 1];
+                String mode=modeOfJoiningList.get(modePreference-1);
+                Modes modeOfJoining = Modes.valueOf(mode);
                 totalFees += modeOfJoining.getFees();
+                List<String>residentialList= Arrays.asList("DAY_SCHOLAR", "HOSTELER");
                 System.out.println("enter your residential status");
-                System.out.println("1.Day scholar" + "\n2.Hosteler");
+                Verification.printOptions(residentialList);
                 int resStatusPreference = Verification.inputVerification(2);
-                ResidentialStatus residentialStatus = ResidentialStatus.values()[resStatusPreference - 1];
+                String resStatus=residentialList.get(resStatusPreference-1);
+                ResidentialStatus residentialStatus = ResidentialStatus.valueOf(resStatus);
                 totalFees += residentialStatus.getFees();
                 long feesPaid = 0;
                 Student newStudent = new Student(mailId, name, bloodGroup, address, phoneNumber, rollNumber, department, joiningYear, modeOfJoining, residentialStatus, modeOfJoining.getFees(), residentialStatus.getFees(), transportFees, miscellaneousFees, totalFees, feesPaid);

@@ -4,11 +4,14 @@ import PortalDatabase.Database;
 import ProfilePage.Department;
 import Verification.Verification;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class PaymentService {
     Database db = Database.getInstance();
 
     public void pay(String mailId) {
-        boolean user = Verification.getUserAsStudent(mailId);
+        boolean user = Verification.isStudent(mailId);
         double convenienceFees = 0;
         long feesTobePaid;
         long feesPaid = 0;
@@ -19,14 +22,19 @@ public class PaymentService {
             System.out.println("fees to be paid : " + feesTobePaid);
             System.out.println("fees Paid : " + feesPaid);
             System.out.println("choose mode of payment:");
-            System.out.println("""
-                    1.UPI
-                    2.DEBIT CARD
-                    3.CREDIT CARD
-                    4.NET BANKING""");
+//            System.out.println("""
+//                    1.UPI
+//                    2.DEBIT CARD
+//                    3.CREDIT CARD
+//                    4.NET BANKING""");
+            List<String>modeOfPaymentList= Arrays.asList("UPI","DEBIT CARD","CREDIT CARD","NET BANKING");
+            Verification.printOptions(modeOfPaymentList);
             int preference = Verification.inputVerification(4);
-            modeOfPayment = PaymentConvenienceFees.values()[preference - 1];
-            double convenienceFeesPercent = modeOfPayment.getPercentExtra();
+            String modeOfPaymentPreference = modeOfPaymentList.get(preference-1);
+            modeOfPayment=PaymentConvenienceFees.valueOf(modeOfPaymentPreference);
+            double convenienceFeesPercent=modeOfPayment.getPercentExtra();
+//            modeOfPayment = PaymentConvenienceFees.values()[preference - 1];
+//            double convenienceFeesPercent = modeOfPayment.getPercentExtra();
             convenienceFees = ((convenienceFeesPercent * db.getTotalFees(mailId)) / 100);
         }
         System.out.println("Payment bill:");
@@ -48,7 +56,7 @@ public class PaymentService {
     }
 
     public void viewBalance(String mailId) {
-        if (!Verification.getUserAsStudent(mailId)) {
+        if (!Verification.isStudent(mailId)) {
             System.out.println("enter student mail id:");
             mailId = Verification.mailVerification();
         }

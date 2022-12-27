@@ -6,7 +6,7 @@ import Verification.Verification;
 public class Result {
     public void results(String mailId) {
         ExamResultManagement resultManagement = new ExamResultManagement();
-        if (!Verification.getUserAsStudent(mailId)) {
+        if (!Verification.isStudent(mailId)) {
             studentResultPageMenuLoop:
             while (true) {
                 System.out.println("""
