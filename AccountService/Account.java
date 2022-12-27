@@ -33,7 +33,7 @@ public class Account {
         System.out.println("enter ur new password");
         String newPassword = Verification.passwordVerification();
         while (password.equals(newPassword)) {
-            System.out.println("password entered above is previously entered password so u cant change");
+            System.out.println("password entered above is previously entered password ");
             newPassword = Verification.passwordVerification();
         }
         db.addIdAndPassword(mailId, newPassword);

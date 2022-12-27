@@ -100,7 +100,7 @@ public class Profile {
             System.out.println("""
                     1.address
                     2.phone Number
-                    3.back to menu page""");
+                    3.back to profile page""");
             int preference = Verification.inputVerification(3);
             switch (preference) {
                 case 1:

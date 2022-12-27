@@ -42,11 +42,9 @@ public class PaymentService {
         System.out.println("payment successful!!");
         System.out.println("do u need receipt for this payment(y/n)");
         String input = Verification.yesOrNoVerification();
-        if (!input.equals("y")) {
-            System.out.println("you don't have access to this page ");
+        if (input.equals("y")) {
+            getReceipt(mailId, db.getName(mailId), db.getRollNum(mailId), db.getDepartment(mailId), db.getFeesPaid(mailId), db.getTotalFees(mailId), amount, modeOfPayment);
         }
-        getReceipt(mailId, db.getName(mailId), db.getRollNum(mailId), db.getDepartment(mailId), db.getFeesPaid(mailId), db.getTotalFees(mailId), amount, modeOfPayment);
-
     }
 
     public void viewBalance(String mailId) {
@@ -56,7 +54,7 @@ public class PaymentService {
         }
         while (!db.getId(mailId)) {
             System.out.println("mailId doesn't exist");
-            System.out.println("do u want to continue(y/n)");
+            System.out.println("do u want to continue in view balance page(y/n)");
             if (Verification.yesOrNoVerification().equals("n")) {
                 break;
             }
