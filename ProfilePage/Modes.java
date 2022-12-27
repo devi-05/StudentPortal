@@ -6,10 +6,12 @@ public enum Modes {
     management(100000);
 
     private final int fees;
-    Modes(int fees){
-        this.fees=fees;
+
+    Modes(int fees) {
+        this.fees = fees;
     }
-    public int getFees(){
+
+    public int getFees() {
         return fees;
     }
 

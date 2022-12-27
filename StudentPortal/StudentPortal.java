@@ -9,14 +9,15 @@ import Verification.Verification;
 import java.io.IOException;
 
 public class StudentPortal implements Portal {
-    Database db=Database.getInstance();
-    Account ac=new Account();
-    Profile profile=new Profile();
-    MainMenu menuObj=new MainMenu();
+    Database db = Database.getInstance();
+    Account ac = new Account();
+    Profile profile = new Profile();
+    MainMenu menuObj = new MainMenu();
+
     @Override
     public void signUp() throws IOException {
         System.out.println("enter mailId ( student : [name@student.in] || Admin : [name@admin.in] )");
-        String mailId= Verification.mailVerification();
+        String mailId = Verification.mailVerification();
         profile.createProfile(ac.createAccount(mailId));
     }
 

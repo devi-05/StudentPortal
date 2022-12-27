@@ -4,49 +4,51 @@ import PortalDatabase.Database;
 import Verification.Verification;
 
 public class ExamResultManagement {
-    ResultGenerator resultGenerator=new ResultGenerator();
-    Database db=Database.getInstance();
-    public void addResult(){
-        System.out.println("enter mailId");
+    ResultGenerator resultGenerator = new ResultGenerator();
+    Database db = Database.getInstance();
+
+    public void addResult() {
+        System.out.println("enter student mailId");
         String mailId = Verification.mailVerification();
-        if(Verification.getUserAsStudent(mailId)) {
+        if (Verification.getUserAsStudent(mailId)) {
             if (!db.getId(mailId)) {
                 System.out.println("student doesn't exist");
             } else {
                 resultGenerator.addResults(mailId);
             }
-        }
-        else {
+        } else {
             System.out.println("enter student mailId");
         }
 
     }
-    public void viewCurrentSemResults(){
-        System.out.println("enter mailId");
+
+    public void viewCurrentSemResults() {
+        System.out.println("enter student mailId");
         String mailId = Verification.mailVerification();
-        if(Verification.getUserAsStudent(mailId)){
-        if (!db.getId(mailId)){
-            System.out.println("student doesn't exist");}
-        else {
-        System.out.println("enter semester number");
-        int semNum = Verification.inputVerification(8);
-            if(db.getSemNumber(mailId,semNum)){
-        System.out.println(resultGenerator.semResult(mailId, semNum));
-        System.out.println("GPA OF "+semNum+":"+resultGenerator.retrieveGpa(mailId,semNum));}
-        else {
-                System.out.println("results are not updated");}
-        }
-        }
-        else {
+        if (Verification.getUserAsStudent(mailId)) {
+            if (!db.getId(mailId)) {
+                System.out.println("student doesn't exist");
+            } else {
+                System.out.println("enter semester number");
+                int semNum = Verification.inputVerification(8);
+                if (db.getSemNumber(mailId, semNum)) {
+                    System.out.println(resultGenerator.semResult(mailId, semNum));
+                    System.out.println("GPA OF " + semNum + ":" + resultGenerator.retrieveGpa(mailId, semNum));
+                } else {
+                    System.out.println("results are not updated");
+                }
+            }
+        } else {
             System.out.println("enter student mail Id");
-             viewCurrentSemResults();
+            viewCurrentSemResults();
         }
     }
+
     public void viewEntireSemResult() {
 
         System.out.println("enter mailId:");
         String mailId = Verification.mailVerification();
-        if(Verification.getUserAsStudent(mailId)) {
+        if (Verification.getUserAsStudent(mailId)) {
             if (!db.getId(mailId)) {
                 System.out.println("student doesn't exist");
             } else {
@@ -58,16 +60,16 @@ public class ExamResultManagement {
                     System.out.println("results are not updated");
                 }
             }
-        }
-        else {
+        } else {
             System.out.println("enter student mailId");
             viewEntireSemResult();
         }
     }
-    public void  retrieveCgpa(){
+
+    public void retrieveCgpa() {
         System.out.println("enter mail id:");
         String mailId = Verification.mailVerification();
-        if(Verification.getUserAsStudent(mailId)) {
+        if (Verification.getUserAsStudent(mailId)) {
             if (!db.getId(mailId)) {
                 System.out.println("student doesn't exist");
             } else {
@@ -78,8 +80,7 @@ public class ExamResultManagement {
                     System.out.println("results are not updated");
                 }
             }
-        }
-        else {
+        } else {
             System.out.println("enter student mailId");
         }
     }

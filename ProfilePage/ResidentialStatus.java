@@ -5,10 +5,11 @@ public enum ResidentialStatus {
     HOSTELER(35000);
     private final int fees;
 
-    ResidentialStatus(int fees){
-        this.fees=fees;
+    ResidentialStatus(int fees) {
+        this.fees = fees;
     }
-    public int getFees(){
+
+    public int getFees() {
         return fees;
     }
 

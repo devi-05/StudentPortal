@@ -8,10 +8,11 @@ public enum GradeValues {
     D(6);
     private final int point;
 
-    GradeValues(int point){
-        this.point=point;
+    GradeValues(int point) {
+        this.point = point;
     }
-    int getPoint(){
+
+    int getPoint() {
         return point;
     }
 }

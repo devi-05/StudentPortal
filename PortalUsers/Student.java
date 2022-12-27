@@ -11,26 +11,27 @@ public class Student extends User {
     private final Department department;
     private final int joiningYear;
     private final Modes modeOfJoining;
-    private ResidentialStatus residentialStatus;
     private final long modeOfJoiningFees;
-    private long residentialStatusFees;
     private final long transportFees;
     private final long miscellaneousFees;
+    private ResidentialStatus residentialStatus;
+    private long residentialStatusFees;
     private long totalFees;
     private long feesPaid;
-    public Student(String mailId, String name, BloodGroup bloodGroup, String address, String phoneNumber, String rollNumber, Department department, int year, Modes mode, ResidentialStatus residentialStatus,long modeOfJoiningFees,long residentialStatusFees,long transportFees,long miscellaneousFees, long totalFees, long feesPaid) {
-        super(mailId,name, bloodGroup,  address, phoneNumber);
+
+    public Student(String mailId, String name, BloodGroup bloodGroup, String address, String phoneNumber, String rollNumber, Department department, int year, Modes mode, ResidentialStatus residentialStatus, long modeOfJoiningFees, long residentialStatusFees, long transportFees, long miscellaneousFees, long totalFees, long feesPaid) {
+        super(mailId, name, bloodGroup, address, phoneNumber);
         this.rollNumber = rollNumber;
         this.department = department;
         this.joiningYear = year;
         this.modeOfJoining = mode;
-        this.residentialStatus=residentialStatus;
-        this.modeOfJoiningFees=modeOfJoiningFees;
-        this.residentialStatusFees=residentialStatusFees;
-        this.transportFees=transportFees;
-        this.miscellaneousFees=miscellaneousFees;
-        this.totalFees=totalFees;
-        this.feesPaid=feesPaid;
+        this.residentialStatus = residentialStatus;
+        this.modeOfJoiningFees = modeOfJoiningFees;
+        this.residentialStatusFees = residentialStatusFees;
+        this.transportFees = transportFees;
+        this.miscellaneousFees = miscellaneousFees;
+        this.totalFees = totalFees;
+        this.feesPaid = feesPaid;
     }
 
     @Override
@@ -43,15 +44,14 @@ public class Student extends User {
                 "\ndepartment=" + department +
                 "\nJoining year=" + joiningYear +
                 "\nmode of joining=" + modeOfJoining +
-                "\nResidential Status="+residentialStatus+
-                "\nTotal fees="+totalFees+
-                "\nfees paid="+feesPaid+
-                "\nbloodGroup=" + getBloodGroup()+
-                "\naddress=" + getAddress()+
-                "\nphoneNumber=" + getPhoneNumber() ;
+                "\nResidential Status=" + residentialStatus +
+                "\nTotal fees=" + totalFees +
+                "\nfees paid=" + feesPaid +
+                "\nbloodGroup=" + getBloodGroup() +
+                "\naddress=" + getAddress() +
+                "\nphoneNumber=" + getPhoneNumber();
 
     }
-
 
 
     public String getRollNumber() {
@@ -78,6 +78,10 @@ public class Student extends User {
         return feesPaid;
     }
 
+    public void setFeesPaid(long feesPaid) {
+        this.feesPaid = feesPaid;
+    }
+
     public long getModeOfJoiningFees() {
         return modeOfJoiningFees;
     }
@@ -92,10 +96,6 @@ public class Student extends User {
 
     public long getMiscellaneousFees() {
         return miscellaneousFees;
-    }
-
-    public void setFeesPaid(long feesPaid) {
-        this.feesPaid = feesPaid;
     }
 
     public Department getDepartment() {

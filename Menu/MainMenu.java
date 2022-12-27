@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class MainMenu {
     public void menu(String mailId) throws IOException {
-        menuLoop : while (true) {
+        menuLoop:
+        while (true) {
             System.out.println("enter ur preference in sign in page");
             System.out.println("""
                     1.Profile page
@@ -37,6 +38,7 @@ public class MainMenu {
             }
         }
     }
+
     public void SignOut() {
         System.out.println("Signing out....");
     }

@@ -7,10 +7,11 @@ public enum PaymentConvenienceFees {
     NET_BANKING(3.5);
     private final double percentExtra;
 
-    PaymentConvenienceFees(double percentExtra){
-        this.percentExtra=percentExtra;
+    PaymentConvenienceFees(double percentExtra) {
+        this.percentExtra = percentExtra;
     }
-    double getPercentExtra(){
+
+    double getPercentExtra() {
         return percentExtra;
     }
 }

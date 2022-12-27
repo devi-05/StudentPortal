@@ -7,7 +7,8 @@ public class Fees {
     public void payService(String mailId) {
         PaymentService payService = new PaymentService();
         if (Verification.getUserAsStudent(mailId)) {
-            studentFeePageMenuLoop: while (true) {
+            studentFeePageMenuLoop:
+            while (true) {
                 System.out.println("""
                         1.pay
                         2.view balance
@@ -22,7 +23,8 @@ public class Fees {
                 }
             }
         } else {
-           adminFeePageMenuLoop :  while (true) {
+            adminFeePageMenuLoop:
+            while (true) {
                 System.out.println("1.view student balance" + "\n2.back to menu page");
                 int inp = Verification.inputVerification(2);
                 switch (inp) {

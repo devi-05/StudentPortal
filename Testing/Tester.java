@@ -1,21 +1,19 @@
 package Testing;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-class Tester{
+class Tester {
     public static void main(String[] args) {
 
-        HashMap <String, List<Integer>>hash=new HashMap<>();
-        List<Integer>list=new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        hash.put("devi",list);
-        System.out.println(hash.get("devi").add(3));
-        System.out.println(hash.get("devi"));
 
+        String input = "09-jun-2012";
+        if (input.matches("([0-9]{1,2}-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-[1-2][0-9]{3})")) {
+            String[] a = input.split("-");
+            for (String i :
+                    a) {
+                System.out.println(i);
 
+            }
+        }
     }
 }
+
 

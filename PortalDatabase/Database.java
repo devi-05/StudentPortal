@@ -1,15 +1,25 @@
 package PortalDatabase;
 
 import PortalUsers.Admin;
-import ProfilePage.Department;
 import PortalUsers.Student;
+import ProfilePage.Department;
 import Verification.Verification;
 
-import java.util.*;
+import java.util.Formatter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Database {
     private static Database db = null;
-
+    private final Map<String, String> mailAndPassword = new HashMap<>();
+    private final Map<String, Student> studentDetails = new HashMap<>();
+    private final Map<String, Admin> adminDetails = new HashMap<>();
+    private final Map<String, Map<Integer, Integer>> totalCreditsDatabase = new HashMap<>();
+    private final Map<String, Integer> semesterAdded = new HashMap<>();
+    private final Map<String, Map<Integer, Double>> totalCreditsWithPoints = new HashMap<>();
+    private final Map<String, Map<Integer, Formatter>> wholeSemesterResult = new HashMap<>();
+    private final Map<String, Map<Integer, Double>> studentGpaDatabase = new HashMap<>();
+    private final Map<String, Double> studentCgpaDatabase = new HashMap<>();
     private Database() {
     }
 
@@ -19,17 +29,6 @@ public class Database {
         }
         return db;
     }
-
-    private final Map<String, String> mailAndPassword = new HashMap<>();
-    private final Map<String, Student> studentDetails = new HashMap<>();
-    private final Map<String, Admin> adminDetails = new HashMap<>();
-    private final Map<String, Map<Integer, Integer>> totalCreditsDatabase = new HashMap<>();
-    private final Map<String,Integer> semesterAdded = new HashMap<>();
-    private final Map<String, Map<Integer, Double>> totalCreditsWithPoints = new HashMap<>();
-    private final Map<String, Map<Integer, Formatter>> wholeSemesterResult = new HashMap<>();
-    private final Map<String, Map<Integer, Double>> studentGpaDatabase = new HashMap<>();
-    private final Map<String, Double> studentCgpaDatabase = new HashMap<>();
-
 
     public void addNewStudent(String mailId, Student s) {
         studentDetails.put(mailId, s);
@@ -51,7 +50,7 @@ public class Database {
         return mailAndPassword.get(mailId);
     }
 
-    public Object getUserData( String mailId) {
+    public Object getUserData(String mailId) {
         if (Verification.getUserAsStudent(mailId)) {
             return studentDetails.get(mailId);
         } else {
@@ -59,7 +58,7 @@ public class Database {
         }
     }
 
-    public void editData( String mailId, String attribute, String newInput) {
+    public void editData(String mailId, String attribute, String newInput) {
         if (Verification.getUserAsStudent(mailId)) {
             if (attribute.equals("address")) {
                 studentDetails.get(mailId).setAddress(newInput);
@@ -92,14 +91,19 @@ public class Database {
         studentDetails.get(mailId).setTotalFees(totalFees);
         studentDetails.get(mailId).setFeesPaid(feesPaid);
     }
-    public long getModeOfJoiningFees(String mailId){
+
+    public long getModeOfJoiningFees(String mailId) {
         return studentDetails.get(mailId).getModeOfJoiningFees();
     }
-    public long getResidentialStatusFees(String mailId){
-        return studentDetails.get(mailId).getResidentialStatusFees();}
+
+    public long getResidentialStatusFees(String mailId) {
+        return studentDetails.get(mailId).getResidentialStatusFees();
+    }
+
     public long getTransportFees(String mailId) {
         return studentDetails.get(mailId).getTransportFees();
     }
+
     public long getMiscellaneousFees(String mailId) {
         return studentDetails.get(mailId).getMiscellaneousFees();
     }
@@ -112,24 +116,23 @@ public class Database {
         return studentDetails.get(mailId).getFeesPaid();
     }
 
-    public void addTotalCredits(String mailId, int semNum,int credits) {
-        Map<Integer,Integer> totalCredits=new HashMap<>();
-        if(totalCreditsDatabase.get(mailId)!=null){
-            Map<Integer, Integer> creditMap=totalCreditsDatabase.get(mailId);
-            creditMap.put(semNum,credits);
-            totalCreditsDatabase.put(mailId,creditMap);
-        }
-        else {
-        totalCredits.put(semNum,credits);
-        totalCreditsDatabase.put(mailId, totalCredits);
+    public void addTotalCredits(String mailId, int semNum, int credits) {
+        Map<Integer, Integer> totalCredits = new HashMap<>();
+        if (totalCreditsDatabase.get(mailId) != null) {
+            Map<Integer, Integer> creditMap = totalCreditsDatabase.get(mailId);
+            creditMap.put(semNum, credits);
+            totalCreditsDatabase.put(mailId, creditMap);
+        } else {
+            totalCredits.put(semNum, credits);
+            totalCreditsDatabase.put(mailId, totalCredits);
         }
     }
 
     public double getTotalCredits(String mailId) {
         int j = 0;
-            for (int i = 1; i <= totalCreditsDatabase.get(mailId).size(); i++) {
-                j += totalCreditsDatabase.get(mailId).get(i);
-            }
+        for (int i = 1; i <= totalCreditsDatabase.get(mailId).size(); i++) {
+            j += totalCreditsDatabase.get(mailId).get(i);
+        }
         return j;
     }
 
@@ -143,51 +146,53 @@ public class Database {
 
     }
 
-    public void addTotalCreditWithGrades(String mailId, int semNum,Double grades) {
-        Map<Integer,Double> totalGradePoints=new HashMap<>();
-        if(totalCreditsWithPoints.get(mailId)!=null){
-            Map<Integer,Double> map=totalCreditsWithPoints.get(mailId);
-            map.put(semNum,grades);
-            totalCreditsWithPoints.put(mailId,map);
+    public void addTotalCreditWithGrades(String mailId, int semNum, Double grades) {
+        Map<Integer, Double> totalGradePoints = new HashMap<>();
+        if (totalCreditsWithPoints.get(mailId) != null) {
+            Map<Integer, Double> map = totalCreditsWithPoints.get(mailId);
+            map.put(semNum, grades);
+            totalCreditsWithPoints.put(mailId, map);
 
-        }
-        else {
-            totalGradePoints.put(semNum,grades);
+        } else {
+            totalGradePoints.put(semNum, grades);
             totalCreditsWithPoints.put(mailId, totalGradePoints);
         }
 
     }
 
-    public void addEntireSemResults(String mailId, int semNum,Formatter fmt) {
-            Map<Integer,Formatter>formatter=new HashMap<>();
-            if(wholeSemesterResult.get(mailId)==null){
-                formatter.put(semNum,fmt);
-                wholeSemesterResult.put(mailId,formatter);
-            }
-            if(!wholeSemesterResult.get(mailId).containsKey(semNum)){
-                Map<Integer,Formatter> map=wholeSemesterResult.get(mailId);
-                map.put(semNum,fmt);
-                wholeSemesterResult.put(mailId,map);
-            }
-    }
-    public void addSemesters(String mailId,int sem){
-        semesterAdded.put(mailId,sem);
-    }
-    public Integer getSemesterAdded(String mailId){
-
-            return semesterAdded.get(mailId);
-
-    }
-    public void addGpa(String mailId, int semNum,double gpa) {
-        HashMap<Integer,Double>hash=new HashMap<>();
-        if(studentGpaDatabase.get(mailId)!= null){
-        Map<Integer, Double> gpaMap=studentGpaDatabase.get(mailId);
-        gpaMap.put(semNum,gpa);
-        studentGpaDatabase.put(mailId,gpaMap);
+    public void addEntireSemResults(String mailId, int semNum, Formatter fmt) {
+        Map<Integer, Formatter> formatter = new HashMap<>();
+        if (wholeSemesterResult.get(mailId) == null) {
+            formatter.put(semNum, fmt);
+            wholeSemesterResult.put(mailId, formatter);
         }
-        else {
-        hash.put(semNum,gpa);
-        studentGpaDatabase.put(mailId,hash);}
+        if (!wholeSemesterResult.get(mailId).containsKey(semNum)) {
+            Map<Integer, Formatter> map = wholeSemesterResult.get(mailId);
+            map.put(semNum, fmt);
+            wholeSemesterResult.put(mailId, map);
+        }
+    }
+
+    public void addSemesters(String mailId, int sem) {
+        semesterAdded.put(mailId, sem);
+    }
+
+    public Integer getSemesterAdded(String mailId) {
+
+        return semesterAdded.get(mailId);
+
+    }
+
+    public void addGpa(String mailId, int semNum, double gpa) {
+        HashMap<Integer, Double> hash = new HashMap<>();
+        if (studentGpaDatabase.get(mailId) != null) {
+            Map<Integer, Double> gpaMap = studentGpaDatabase.get(mailId);
+            gpaMap.put(semNum, gpa);
+            studentGpaDatabase.put(mailId, gpaMap);
+        } else {
+            hash.put(semNum, gpa);
+            studentGpaDatabase.put(mailId, hash);
+        }
     }
 
     public void addCgpa(String mailId, double cgpa) {
@@ -217,7 +222,8 @@ public class Database {
             return wholeSemesterResult.get(mailId).containsKey(semNum);
         }
     }
-    public boolean getMailForResults(String mailId){
+
+    public boolean getMailForResults(String mailId) {
         return wholeSemesterResult.containsKey(mailId);
     }
 }

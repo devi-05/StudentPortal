@@ -3,19 +3,19 @@ package ProfilePage;
 import AccountService.Account;
 import Menu.MainMenu;
 import PortalDatabase.Database;
-import PortalUsers.*;
+import PortalUsers.Admin;
+import PortalUsers.Student;
 import Verification.Verification;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class Profile {
-    Database db=Database.getInstance();
-    Account ac=new Account();
-    MainMenu menuObj=new MainMenu();
+    Database db = Database.getInstance();
+    Account ac = new Account();
+    MainMenu menuObj = new MainMenu();
+
     public void createProfile(String mailId) throws IOException {
-        if(mailId!=null) {
+        if (mailId != null) {
             System.out.println("enter your details to create your profile");
             int rollNum = 1;
             System.out.println("enter name (note: name should match this e.g John-D or John.D):");
@@ -33,9 +33,8 @@ public class Profile {
                     5.B_positive
                     6.B_negative
                     7.AB_negative""");
-            int bg = Verification.inputVerification(7);
-            List<BloodGroup> bgList = Arrays.asList(BloodGroup.values());
-            BloodGroup bloodGroup = bgList.get(bg-1);
+            int bloodGroupPreference = Verification.inputVerification(7);
+            BloodGroup bloodGroup = BloodGroup.values()[bloodGroupPreference - 1];
             if (Verification.getUserAsStudent(mailId)) {
                 String rollNumber = "s" + rollNum++;
                 System.out.println("enter any alphabet a to l to choose ur department");
@@ -53,8 +52,7 @@ public class Profile {
                         11)COMPUTER_SCIENCE,
                         12)INFORMATION_TECHNOLOGY;""");
                 int dept = Verification.inputVerification(12);
-                List<Department> deptList = Arrays.asList(Department.values());
-                Department department = deptList.get(dept-1);
+                Department department = Department.values()[dept - 1];
                 int joiningYear = Verification.StudentJoiningYear();
                 long transportFees = 40000;
                 long miscellaneousFees = 45000;
@@ -63,20 +61,18 @@ public class Profile {
                 System.out.println("""
                         1)COUNSELING
                         2)MANAGEMENT""");
-                int mode = Verification.inputVerification(2);
-                List<Modes> modesList = Arrays.asList(Modes.values());
-                Modes modeOfJoining = modesList.get(mode-1);
+                int modePreference = Verification.inputVerification(2);
+                Modes modeOfJoining = Modes.values()[modePreference - 1];
                 totalFees += modeOfJoining.getFees();
                 System.out.println("enter your residential status");
                 System.out.println("1.Day scholar" + "\n2.Hosteler");
-                int resStatus = Verification.inputVerification(2);
-                List<ResidentialStatus> resStatusList = Arrays.asList(ResidentialStatus.values());
-                ResidentialStatus residentialStatus = resStatusList.get(resStatus-1);
+                int resStatusPreference = Verification.inputVerification(2);
+                ResidentialStatus residentialStatus = ResidentialStatus.values()[resStatusPreference - 1];
                 totalFees += residentialStatus.getFees();
                 long feesPaid = 0;
-                Student newStudent = new Student(mailId, name, bloodGroup, address, phoneNumber, rollNumber, department, joiningYear, modeOfJoining, residentialStatus,modeOfJoining.getFees(),residentialStatus.getFees(), transportFees,miscellaneousFees,totalFees, feesPaid);
+                Student newStudent = new Student(mailId, name, bloodGroup, address, phoneNumber, rollNumber, department, joiningYear, modeOfJoining, residentialStatus, modeOfJoining.getFees(), residentialStatus.getFees(), transportFees, miscellaneousFees, totalFees, feesPaid);
                 db.addNewStudent(mailId, newStudent);
-            } else  {
+            } else {
                 String employeeId = "A" + rollNum++;
                 System.out.println("enter date of joining[format:dd-month-yyyy,eg:09-jun-2022]");
                 String dateOfJoining = Verification.empDojVerification();
@@ -85,18 +81,21 @@ public class Profile {
             }
             System.out.println("created ur profile successfully");
             System.out.println("do you want to continue and move to menu page(y/n)");
-            if(Verification.yesOrNoVerification().equals("y")){
+            if (Verification.yesOrNoVerification().equals("y")) {
                 menuObj.menu(mailId);
             }
         }
 
     }
-    public void viewProfile(String mailId){
+
+    public void viewProfile(String mailId) {
 
         System.out.println(db.getUserData(mailId));
     }
+
     public void editProfile(String mailId) throws IOException {
-        editProfileMenuLoop : while (true) {
+        editProfileMenuLoop:
+        while (true) {
             System.out.println("choose category which u want to edit:");
             System.out.println("""
                     1.address

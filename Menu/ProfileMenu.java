@@ -1,17 +1,19 @@
 package Menu;
 
 import PortalDatabase.Database;
-import Verification.Verification;
 import ProfilePage.Profile;
+import Verification.Verification;
 
 import java.io.IOException;
 
 public class ProfileMenu {
-    Database db=Database.getInstance();
+    Database db = Database.getInstance();
+
     public void profileOption(String mailId) throws IOException {
-        Profile profile=new Profile();
+        Profile profile = new Profile();
         if (Verification.getUserAsStudent(mailId)) {
-            studentProfilePageMenuLoop : while (true) {
+            studentProfilePageMenuLoop:
+            while (true) {
                 System.out.println("1.view profile" + "\n2.edit profile" + "\n3.back to menu page");
                 int input = Verification.inputVerification(3);
                 switch (input) {
@@ -23,7 +25,8 @@ public class ProfileMenu {
                 }
             }
         } else {
-            adminProfilePageMenuLoop : while (true) {
+            adminProfilePageMenuLoop:
+            while (true) {
                 System.out.println("""
                         1.view profile
                         2.edit profile

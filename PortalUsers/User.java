@@ -3,7 +3,7 @@ package PortalUsers;
 import ProfilePage.BloodGroup;
 
 public class User {
-    private  final String mailId;
+    private final String mailId;
     private final String name;
     private final BloodGroup bloodGroup;
     private String address;
@@ -11,7 +11,7 @@ public class User {
 
 
     public User(String gmail, String name, BloodGroup bloodGroup, String address, String phoneNumber) {
-        this.mailId=gmail;
+        this.mailId = gmail;
         this.name = name;
         this.bloodGroup = bloodGroup;
         this.address = address;

@@ -7,7 +7,8 @@ public class Result {
     public void results(String mailId) {
         ExamResultManagement resultManagement = new ExamResultManagement();
         if (!Verification.getUserAsStudent(mailId)) {
-            studentResultPageMenuLoop:while (true) {
+            studentResultPageMenuLoop:
+            while (true) {
                 System.out.println("""
                         1.add result
                         2.view semester result
@@ -26,7 +27,8 @@ public class Result {
                 }
             }
         } else {
-            adminResultPageMenuLoop:while (true) {
+            adminResultPageMenuLoop:
+            while (true) {
                 System.out.println("""
                         1.view semester result
                         2.view entire sem result

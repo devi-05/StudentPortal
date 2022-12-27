@@ -15,9 +15,11 @@ public enum Months {
     DEC(31);
     private final int numOfDays;
 
-    Months(int numOfDays){
-        this.numOfDays=numOfDays;
+    Months(int numOfDays) {
+        this.numOfDays = numOfDays;
     }
-    public int getDays(){
+
+    public int getDays() {
         return numOfDays;
-    }}
+    }
+}
