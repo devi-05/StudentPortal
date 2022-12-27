@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Verification {
@@ -39,7 +37,7 @@ public class Verification {
 
     public static String nameVerification() {
         String name = s.next();
-        if (name.matches("[A-Z][a-z]+[-.][A-Za-z]{1,15}")) {
+        if (name.matches("[A-Za-z]+[-.][A-Za-z]{1,15}")) {
             return name.substring(0,1).toUpperCase()+name.substring(1);
         } else {
             System.out.println("name should be in above format and should contain 5 to 15 alphabets !!!!");
@@ -52,7 +50,7 @@ public class Verification {
         if (input.matches("[0-9]{10}")) {
             return input;
         } else {
-            System.out.println("enter proper phone number starts with 9 and should contain 10 digits");
+            System.out.println("enter proper phone number with 10 digits");
             return phoneNumVerification();
         }
 
@@ -77,40 +75,42 @@ public class Verification {
         return Integer.parseInt(formattedYear);
     }
 
-    public static String empDojVerification() {
-        String input = s.next();
-        List<String>monthsWithThirtyOneDaysList= Arrays.asList("JAN", "MAR", "MAY", "JUL", "AUG", "OCT", "DEC");
-        List<String>monthsWithThirtyDaysList= Arrays.asList("APR","JUN","SEP","NOV");
-        if (input.matches("([0-9]{1,2}-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-[1-2][0-9]{3})")) {
-            String[] splitEmpDoj = input.split("-");
-            int number ;
-            String string = (splitEmpDoj[1].toUpperCase());
-            if(monthsWithThirtyOneDaysList.contains(string)){
-                number=31;
-            }
-            else if (monthsWithThirtyDaysList.contains(string)){
-                number=30;
-            }
-            else {
-                number=29;
-            }
-            LocalDate date = LocalDate.now();
-            DateTimeFormatter formatterYear = DateTimeFormatter.ofPattern("yyyy");
-            String formattedYear = date.format(formatterYear);
-            if (number < Integer.parseInt(splitEmpDoj[0])) {
-                System.out.println("enter correct date");
-                return empDojVerification();
-            }
-            if (Integer.parseInt(splitEmpDoj[2]) > Integer.parseInt(formattedYear)) {
-                System.out.println("entered year is beyond current date");
-                return empDojVerification();
-            }
-        } else {
-            System.out.println("enter in correct format");
-            return empDojVerification();
-        }
-        return input;
-    }
+//    public static String empDojVerification() {
+//        String input = s.next();
+//        List<String>monthsWithThirtyOneDaysList= Arrays.asList("JAN", "MAR", "MAY", "JUL", "AUG", "OCT", "DEC");
+//        List<String>monthsWithThirtyDaysList= Arrays.asList("APR","JUN","SEP","NOV");
+//        if (input.matches("([0-9]{1,2}-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-[1-2][0-9]{3})")) {
+//            String[] splitEmpDoj = input.split("-");
+//            int number ;
+//            String string = (splitEmpDoj[1].toUpperCase());
+//            if(monthsWithThirtyOneDaysList.contains(string)){
+//                number=31;
+//            }
+//            else if (monthsWithThirtyDaysList.contains(string)){
+//                number=30;
+//            }
+//            else {
+//                number=29;
+//            }
+//            LocalDate date = LocalDate.now();
+//            DateTimeFormatter formatterYear = DateTimeFormatter.ofPattern("yyyy");
+//            DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd");
+//            String formattedDate=date.format(formatterDate);
+//            String formattedYear = date.format(formatterYear);
+//            if (number < Integer.parseInt(splitEmpDoj[0]) || Integer.parseInt(splitEmpDoj[0]) > Integer.parseInt(formattedDate)) {
+//                System.out.println("enter correct date");
+//                return empDojVerification();
+//            }
+//            if (Integer.parseInt(splitEmpDoj[2]) > Integer.parseInt(formattedYear)) {
+//                System.out.println("entered year is beyond current date");
+//                return empDojVerification();
+//            }
+//        } else {
+//            System.out.println("enter in correct format");
+//            return empDojVerification();
+//        }
+//        return input;
+//    }
 
     public static long amountVerification() {
         long input = s.nextLong();

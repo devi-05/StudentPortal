@@ -8,6 +8,8 @@ import PortalUsers.Student;
 import Verification.Verification;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Profile {
     Database db = Database.getInstance();
@@ -74,8 +76,9 @@ public class Profile {
                 db.addNewStudent(mailId, newStudent);
             } else {
                 String employeeId = "A" + rollNum++;
-                System.out.println("enter date of joining[format:dd-MMM-yyyy,eg:09-jun-2022]");
-                String dateOfJoining = Verification.empDojVerification();
+                LocalDate date = LocalDate.now();
+                DateTimeFormatter formatterDateAndYear = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
+                String dateOfJoining = date.format(formatterDateAndYear);
                 Admin newAdmin = new Admin(mailId, name, bloodGroup, address, phoneNumber, employeeId, dateOfJoining);
                 db.addNewAdmin(mailId, newAdmin);
             }

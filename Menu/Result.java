@@ -33,9 +33,7 @@ public class Result {
                         1.view semester result
                         2.view entire sem result
                         3.calculate cgpa
-                        4.back to menu page
-                        """);
-
+                        4.back to menu page""");
                 int input = Verification.inputVerification(4);
                 switch (input) {
                     case 1 -> resultManagement.viewCurrentSemResults();
