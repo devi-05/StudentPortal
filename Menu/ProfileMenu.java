@@ -14,9 +14,9 @@ public class ProfileMenu {
     public void profileOption(String mailId) throws IOException {
         Profile profile = new Profile();
         int input;
-        List<String> studentProfileMenuList = Arrays.asList("view profile", "edit profile");
-        List<String> adminProfileMenuList = Arrays.asList("view profile", "edit profile", "view student profile");
-        while (true) {
+        List<String> studentProfileMenuList = Arrays.asList("back to menu page","view profile", "edit profile");
+        List<String> adminProfileMenuList = Arrays.asList("back to menu page","view own profile", "edit own profile", "view student profile");
+        profileMenuLoop:while (true) {
             if (Verification.isStudent(mailId)) {
                 Verification.printOptions(studentProfileMenuList);
                 System.out.println("enter ur preference:");
@@ -26,14 +26,11 @@ public class ProfileMenu {
                 System.out.println("enter ur preference:");
                 input = Verification.inputVerification(4);
             }
-            System.out.println("""
-                    1.view profile
-                    2.edit profile
-                    3.View student profile""");
             switch (input) {
-                case 1 -> profile.viewProfile(mailId);
-                case 2 -> profile.editProfile(mailId);
-                case 3 -> {
+                case 1 -> {break profileMenuLoop;}
+                case 2 -> profile.viewProfile(mailId);
+                case 3 -> profile.editProfile(mailId);
+                case 4 -> {
                     System.out.println("enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 
@@ -49,11 +46,7 @@ public class ProfileMenu {
                 }
 
             }
-            System.out.println("do u want to exit and move to menu page(y/n)");
-            String preference = Verification.yesOrNoVerification();
-            if (preference.equals("y")) {
-                break;
-            }
+
         }
 
     }
