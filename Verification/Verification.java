@@ -39,7 +39,7 @@ public class Verification {
     public static String nameVerification() {
         String name = s.next();
         if (name.matches("[A-Za-z]+[-.][A-Za-z]{1,15}")) {
-            return name.substring(0,1).toUpperCase()+name.substring(1);
+            return name.substring(0, 1).toUpperCase() + name.substring(1);
         } else {
             System.out.println("name should be in above format and should contain 5 to 15 alphabets !!!!");
             return nameVerification();
@@ -153,9 +153,10 @@ public class Verification {
         }
 
     }
-    public static void printOptions(List list){
-        for (int i=0;i<list.size();i++){
-            System.out.println((i+1)+"."+list.get(i));
+
+    public static void printOptions(List list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println((i + 1) + "." + list.get(i));
         }
     }
 

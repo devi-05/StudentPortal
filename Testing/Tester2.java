@@ -1,17 +1,20 @@
 package Testing;
 
-enum days{
+enum days {
     MON(1),
     TUES(2);
     private final int num;
-    days(int num){
-        this.num=num;
+
+    days(int num) {
+        this.num = num;
     }
-    public int get(){
+
+    public int get() {
         return num;
     }
 
 }
+
 public class Tester2 {
 
 

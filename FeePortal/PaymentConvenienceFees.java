@@ -11,7 +11,7 @@ public enum PaymentConvenienceFees {
         this.percentExtra = percentExtra;
     }
 
-     double getPercentExtra() {
+    double getPercentExtra() {
         return percentExtra;
     }
 

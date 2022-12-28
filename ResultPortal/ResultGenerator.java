@@ -41,10 +41,10 @@ public class ResultGenerator {
                 totalCreditsSum += subCredit;
                 Credits.add(subCredit);
                 System.out.println("enter grades:");
-                List<String>gradeList= Arrays.asList("O","A","B","C","D");
+                List<String> gradeList = Arrays.asList("O", "A", "B", "C", "D");
                 Verification.printOptions(gradeList);
                 int gradePreference = Verification.inputVerification(5);
-                String grades=gradeList.get(gradePreference-1);
+                String grades = gradeList.get(gradePreference - 1);
                 Grades.add(GradeValues.valueOf(grades));
                 GradePoints.add((double) (subCredit * GradeValues.valueOf(grades).getPoint()));
             }

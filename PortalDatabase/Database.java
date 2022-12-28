@@ -20,6 +20,7 @@ public class Database {
     private final Map<String, Map<Integer, Formatter>> wholeSemesterResult = new HashMap<>();
     private final Map<String, Map<Integer, Double>> studentGpaDatabase = new HashMap<>();
     private final Map<String, Double> studentCgpaDatabase = new HashMap<>();
+
     private Database() {
     }
 

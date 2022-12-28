@@ -14,6 +14,7 @@ public class MainMenu {
                     2.Fee portal
                     3.Result portal
                     4.SignOut""");
+            System.out.println("enter ur preference:");
             int preference = Verification.inputVerification(4);
             switch (preference) {
                 case 1 -> {
