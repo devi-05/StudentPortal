@@ -3,7 +3,7 @@ package PortalDatabase;
 import PortalUsers.Admin;
 import PortalUsers.Student;
 import ProfilePage.Department;
-import Verification.Verification;
+import Helper.Verification;
 
 import java.util.Formatter;
 import java.util.HashMap;

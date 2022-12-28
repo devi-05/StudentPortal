@@ -1,7 +1,8 @@
 package ResultPortal;
 
+import Helper.UtilFunction;
 import PortalDatabase.Database;
-import Verification.Verification;
+import Helper.Verification;
 
 import java.util.*;
 
@@ -41,17 +42,16 @@ public class ResultGenerator {
                 totalCreditsSum += subCredit;
                 Credits.add(subCredit);
                 System.out.println("enter grades:");
-                List<String> gradeList = Arrays.asList("O", "A", "B", "C", "D");
-                Verification.printOptions(gradeList);
+                UtilFunction.printOptions(GradeValues.values());
                 int gradePreference = Verification.inputVerification(5);
-                String grades = gradeList.get(gradePreference - 1);
-                Grades.add(GradeValues.valueOf(grades));
-                GradePoints.add((double) (subCredit * GradeValues.valueOf(grades).getPoint()));
+                GradeValues grades = GradeValues.values()[gradePreference - 1];
+                Grades.add(GradeValues.valueOf(String.valueOf(grades)));
+                GradePoints.add((double) (subCredit * GradeValues.valueOf(String.valueOf(grades)).getPoint()));
             }
             db.addTotalCredits(mailId, semNum, totalCreditsSum);
             double grade = 0;
-            for (int i = 0; i < GradePoints.size(); i++) {
-                grade += GradePoints.get(i);
+            for (Double gradePoint : GradePoints) {
+                grade += gradePoint;
             }
             db.addTotalCreditWithGrades(mailId, semNum, grade);
             Formatter fmt = new Formatter();

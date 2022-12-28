@@ -1,6 +1,7 @@
 package Menu;
 
-import Verification.Verification;
+import Helper.UtilFunction;
+import Helper.Verification;
 
 import java.io.IOException;
 
@@ -9,30 +10,27 @@ public class MainMenu {
         menuLoop:
         while (true) {
             System.out.println("enter ur preference in sign in page");
-            System.out.println("""
-                    1.Profile page
-                    2.Fee portal
-                    3.Result portal
-                    4.SignOut""");
+            UtilFunction.printOptions(Menu.values());
             System.out.println("enter ur preference:");
-            int preference = Verification.inputVerification(4);
+            int input = Verification.inputVerification(Menu.values().length);
+            Menu preference=Menu.values()[input-1];
             switch (preference) {
-                case 1 -> {
+                case PROFILE_PAGE -> {
                     System.out.println("welcome to profile page");
                     ProfileMenu profile = new ProfileMenu();
                     profile.profileOption(mailId);
                 }
-                case 2 -> {
+                case FEE_PORTAL -> {
                     System.out.println("welcome to fee portal");
                     Fees fees = new Fees();
                     fees.payService(mailId);
                 }
-                case 3 -> {
+                case RESULT_PORTAL -> {
                     System.out.println("welcome to result portal");
                     Result result = new Result();
                     result.results(mailId);
                 }
-                case 4 -> {
+                case SIGN_OUT-> {
                     SignOut();
                     break menuLoop;
                 }

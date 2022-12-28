@@ -1,11 +1,9 @@
 package FeePortal;
 
+import Helper.UtilFunction;
+import Helper.Verification;
 import PortalDatabase.Database;
 import ProfilePage.Department;
-import Verification.Verification;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class PaymentService {
     Database db = Database.getInstance();
@@ -15,18 +13,16 @@ public class PaymentService {
         double convenienceFees = 0;
         long feesTobePaid;
         long feesPaid = 0;
-        PaymentConvenienceFees modeOfPayment = null;
+        PaymentConvenienceFees modeOfPayment = null ;
         if (user) {
             feesTobePaid = db.getTotalFees(mailId);
             feesPaid = db.getFeesPaid(mailId);
             System.out.println("fees to be paid : " + feesTobePaid);
             System.out.println("fees Paid : " + feesPaid);
             System.out.println("choose mode of payment:");
-            List<String> modeOfPaymentList = Arrays.asList("UPI", "DEBIT CARD", "CREDIT CARD", "NET BANKING");
-            Verification.printOptions(modeOfPaymentList);
-            int preference = Verification.inputVerification(4);
-            String modeOfPaymentPreference = modeOfPaymentList.get(preference - 1);
-            modeOfPayment = PaymentConvenienceFees.valueOf(modeOfPaymentPreference);
+            UtilFunction.printOptions(PaymentConvenienceFees.values());
+            int preference = Verification.inputVerification(PaymentConvenienceFees.values().length);
+            modeOfPayment = PaymentConvenienceFees.values()[preference - 1];
             double convenienceFeesPercent = modeOfPayment.getPercentExtra();
             convenienceFees = ((convenienceFeesPercent * db.getTotalFees(mailId)) / 100);
         }

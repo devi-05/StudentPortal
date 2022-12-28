@@ -1,10 +1,11 @@
 package StudentPortal;
 
 import AccountService.Account;
+import Helper.UtilFunction;
 import Menu.MainMenu;
 import PortalDatabase.Database;
 import ProfilePage.Profile;
-import Verification.Verification;
+import Helper.Verification;
 
 import java.io.IOException;
 
@@ -55,7 +56,7 @@ public class StudentPortal implements Portal {
 
                 }
             }
-            Verification.getWelcomeMessage(mailId);
+            UtilFunction.getWelcomeMessage(mailId);
             menuObj.menu(mailId);
         }
     }

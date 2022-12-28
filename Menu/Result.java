@@ -1,36 +1,35 @@
 package Menu;
 
+import Helper.UtilFunction;
+import Helper.Verification;
 import ResultPortal.ExamResultManagement;
-import Verification.Verification;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Result {
     public void results(String mailId) {
         ExamResultManagement resultManagement = new ExamResultManagement();
-        List<String> studentResultOptions = Arrays.asList("back to menu page", "view semester result", "view entire sem result", "calculate cgpa");
-        List<String> adminResultOptions = Arrays.asList("back to menu page", "view semester result", "view entire sem result", "calculate cgpa", "add result");
         int inputPreference;
         resultPageMenuLoop:
         while (true) {
             if (Verification.isStudent(mailId)) {
-                Verification.printOptions(studentResultOptions);
+                UtilFunction.printOptions(Arrays.copyOf(ResultMenu.values(), ResultMenu.values().length - 1));
                 System.out.println("enter ur preference:");
-                inputPreference = Verification.inputVerification(4);
+                inputPreference = Verification.inputVerification(ResultMenu.values().length-1);
             } else {
-                Verification.printOptions(adminResultOptions);
+                UtilFunction.printOptions(ResultMenu.values());
                 System.out.println("enter ur preference:");
-                inputPreference = Verification.inputVerification(5);
+                inputPreference = Verification.inputVerification(ResultMenu.values().length);
             }
-            switch (inputPreference) {
-                case 1 -> {
+            ResultMenu preference=ResultMenu.values()[inputPreference-1];
+            switch (preference) {
+                case BACK_TO_MENU_PAGE -> {
                     break resultPageMenuLoop;
                 }
-                case 2 -> resultManagement.viewCurrentSemResults();
-                case 3 -> resultManagement.viewEntireSemResult();
-                case 4 -> resultManagement.retrieveCgpa();
-                case 5 -> resultManagement.addResult();
+                case VIEW_SEMESTER_RESULT -> resultManagement.viewCurrentSemResults();
+                case VIEW_ENTIRE_SEM_RESULT-> resultManagement.viewEntireSemResult();
+                case CALCULATE_CGPA-> resultManagement.retrieveCgpa();
+                case ADD_RESULT -> resultManagement.addResult();
             }
         }
     }

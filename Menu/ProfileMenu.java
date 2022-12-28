@@ -1,12 +1,12 @@
 package Menu;
 
+import Helper.UtilFunction;
+import Helper.Verification;
 import PortalDatabase.Database;
 import ProfilePage.Profile;
-import Verification.Verification;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 public class ProfileMenu {
     Database db = Database.getInstance();
@@ -14,26 +14,25 @@ public class ProfileMenu {
     public void profileOption(String mailId) throws IOException {
         Profile profile = new Profile();
         int input;
-        List<String> studentProfileMenuList = Arrays.asList("back to menu page", "view profile", "edit profile");
-        List<String> adminProfileMenuList = Arrays.asList("back to menu page", "view own profile", "edit own profile", "view student profile");
         profileMenuLoop:
         while (true) {
             if (Verification.isStudent(mailId)) {
-                Verification.printOptions(studentProfileMenuList);
+                UtilFunction.printOptions(Arrays.copyOf(ProfileMenuOptions.values(), ProfileMenuOptions.values().length - 2));
                 System.out.println("enter ur preference:");
-                input = Verification.inputVerification(3);
+                input = Verification.inputVerification(ProfileMenuOptions.values().length-2);
             } else {
-                Verification.printOptions(adminProfileMenuList);
+                UtilFunction.printOptions(ProfileMenuOptions.values());
                 System.out.println("enter ur preference:");
-                input = Verification.inputVerification(4);
+                input = Verification.inputVerification(ProfileMenuOptions.values().length);
             }
-            switch (input) {
-                case 1 -> {
+            ProfileMenuOptions preference=ProfileMenuOptions.values()[input-1];
+            switch (preference) {
+                case BACK_TO_MENU_PAGE -> {
                     break profileMenuLoop;
                 }
-                case 2 -> profile.viewProfile(mailId);
-                case 3 -> profile.editProfile(mailId);
-                case 4 -> {
+                case VIEW_OWN_PROFILE -> profile.viewProfile(mailId);
+                case EDIT_OWN_PROFILE -> profile.editProfile(mailId);
+                case VIEW_STUDENT_PROFILE -> {
                     System.out.println("enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 
@@ -47,6 +46,21 @@ public class ProfileMenu {
                         profile.viewProfile(studentMailId);
                     }
                 }
+                case EDIT_STUDENT_PROFILE -> {
+                    System.out.println("enter student mailID:");
+                    String studentMailId = Verification.mailVerification();
+
+                    if (!Verification.isStudent(studentMailId)) {
+                        System.out.println("enter student mailId");
+                        studentMailId = Verification.mailVerification();
+                    }
+                    if (!db.getId(studentMailId)) {
+                        System.out.println("student doesn't exist");
+                    } else {
+                        profile.editProfile(studentMailId);
+                    }
+                }
+
 
             }
 

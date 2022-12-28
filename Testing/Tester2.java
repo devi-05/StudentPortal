@@ -19,6 +19,9 @@ public class Tester2 {
 
 
     public static void main(String[] args) {
-        System.out.println();
+        days[] arr=days.values();
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println((i + 1) + "." + arr[i]);
+        }
     }
 }

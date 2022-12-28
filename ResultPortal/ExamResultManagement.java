@@ -1,7 +1,7 @@
 package ResultPortal;
 
 import PortalDatabase.Database;
-import Verification.Verification;
+import Helper.Verification;
 
 public class ExamResultManagement {
     ResultGenerator resultGenerator = new ResultGenerator();

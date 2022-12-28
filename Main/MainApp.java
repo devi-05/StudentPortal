@@ -1,6 +1,9 @@
+package Main;
+
+import Helper.UtilFunction;
+import Helper.Verification;
 import StudentPortal.Portal;
 import StudentPortal.StudentPortal;
-import Verification.Verification;
 
 import java.io.IOException;
 
@@ -10,16 +13,14 @@ public class MainApp {
         System.out.println("Welcome to student portal!!!!!");
         mainLoop:
         while (true) {
-            System.out.println("""
-                    1.SIGN UP
-                    2.SIGN IN
-                    3.EXIT""");
+            UtilFunction.printOptions(PortalOptions.values());
             System.out.println("enter ur preference :");
-            int input = Verification.inputVerification(3);
-            switch (input) {
-                case 1 -> s.signUp();
-                case 2 -> s.signIn();
-                case 3 -> {
+            int input = Verification.inputVerification(PortalOptions.values().length);
+            PortalOptions preference=PortalOptions.values()[input-1];
+            switch (preference) {
+                case SIGN_UP -> s.signUp();
+                case SIGN_IN -> s.signIn();
+                case EXIT -> {
                     break mainLoop;
                 }
             }

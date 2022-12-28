@@ -1,10 +1,10 @@
 package Menu;
 
 import FeePortal.PaymentService;
-import Verification.Verification;
+import Helper.UtilFunction;
+import Helper.Verification;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Fees {
     public void payService(String mailId) {
@@ -12,23 +12,22 @@ public class Fees {
         int inputPreference;
         feeMenuLoop:
         while (true) {
-            if (Verification.isStudent(mailId)) {
-                List<String> studentFeesOption = Arrays.asList("back to menu page", "view balance", "pay");
-                Verification.printOptions(studentFeesOption);
+            if (!Verification.isStudent(mailId)) {
+                UtilFunction.printOptions(Arrays.copyOf(FeeMenu.values(), FeeMenu.values().length - 1));
                 System.out.println("enter ur preference");
-                inputPreference = Verification.inputVerification(3);
+                inputPreference = Verification.inputVerification(FeeMenu.values().length-1);
             } else {
-                List<String> adminFeesOption = Arrays.asList("back to menu page", "view student balance");
-                Verification.printOptions(adminFeesOption);
+                UtilFunction.printOptions(FeeMenu.values());
                 System.out.println("enter ur preference");
-                inputPreference = Verification.inputVerification(2);
+                inputPreference = Verification.inputVerification(FeeMenu.values().length);
             }
-            switch (inputPreference) {
-                case 1 -> {
+            FeeMenu preference=FeeMenu.values()[inputPreference-1];
+            switch (preference) {
+                case BACK_TO_MENU_PAGE -> {
                     break feeMenuLoop;
                 }
-                case 2 -> payService.viewBalance(mailId);
-                case 3 -> payService.pay(mailId);
+                case VIEW_BALANCE -> payService.viewBalance(mailId);
+                case PAY -> payService.pay(mailId);
             }
         }
     }
