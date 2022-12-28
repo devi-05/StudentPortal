@@ -11,9 +11,9 @@ public class UtilFunction {
         String splitName = mailId.split("@")[1];
         String user = splitName.split("\\.")[0];
         if (user.equals("student")) {
-            System.out.println("welcome to the portal......u logged in as STUDENT");
+            System.out.println("Welcome to the portal......You logged in as STUDENT");
         } else {
-            System.out.println("welcome to the portal......u logged in as ADMIN");
+            System.out.println("Welcome to the portal......You logged in as ADMIN");
         }
     }
 }

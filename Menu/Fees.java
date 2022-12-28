@@ -14,11 +14,11 @@ public class Fees {
         while (true) {
             if (!Verification.isStudent(mailId)) {
                 UtilFunction.printOptions(Arrays.copyOf(FeeMenu.values(), FeeMenu.values().length - 1));
-                System.out.println("enter ur preference");
+                System.out.println("Enter ur preference");
                 inputPreference = Verification.inputVerification(FeeMenu.values().length-1);
             } else {
                 UtilFunction.printOptions(FeeMenu.values());
-                System.out.println("enter ur preference");
+                System.out.println("Enter ur preference");
                 inputPreference = Verification.inputVerification(FeeMenu.values().length);
             }
             FeeMenu preference=FeeMenu.values()[inputPreference-1];

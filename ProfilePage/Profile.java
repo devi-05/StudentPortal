@@ -12,26 +12,26 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Profile {
-    Database db = Database.getInstance();
-    MainMenu menuObj = new MainMenu();
+    private final Database db = Database.getInstance();
+    private final MainMenu menuObj = new MainMenu();
 
     public void createProfile(String mailId) throws IOException {
         if (mailId != null) {
-            System.out.println("enter your details to create your profile");
+            System.out.println("Enter your details to create your profile");
             int rollNum = 1;
-            System.out.println("enter name (note: name should match this e.g John-D or John.D):");
+            System.out.println("Enter name (note: name should match this e.g John-D or John.D):");
             String name = Verification.nameVerification();
-            System.out.println("enter phone number");
+            System.out.println("Enter phone number");
             String phoneNumber = Verification.phoneNumVerification();
-            System.out.println("enter address");
+            System.out.println("Enter address");
             String address = Verification.addressVerification();
-            System.out.println("enter blood group:");
+            System.out.println("Enter blood group:");
             UtilFunction.printOptions(BloodGroup.values());
             int bloodGroupPreference = Verification.inputVerification(BloodGroup.values().length);
             BloodGroup bloodGroup = BloodGroup.values()[bloodGroupPreference - 1];
             if (Verification.isStudent(mailId)) {
-                String rollNumber = "s" + rollNum++;
-                System.out.println("enter department :");
+                String rollNumber = "S" + rollNum++;
+                System.out.println("Enter department :");
                 UtilFunction.printOptions(Department.values());
                 int deptOption = Verification.inputVerification(Department.values().length);
                 Department department = Department.values()[deptOption - 1];
@@ -39,12 +39,12 @@ public class Profile {
                 long transportFees = 40000;
                 long miscellaneousFees = 45000;
                 long totalFees = transportFees + miscellaneousFees;
-                System.out.println("enter mode of joining:");
+                System.out.println("Enter mode of joining:");
                 UtilFunction.printOptions(Modes.values());
                 int modePreference = Verification.inputVerification(Modes.values().length);
                 Modes modeOfJoining = Modes.values()[modePreference - 1];
                 totalFees += modeOfJoining.getFees();
-                System.out.println("enter your residential status");
+                System.out.println("Enter your residential status");
                 UtilFunction.printOptions(ResidentialStatus.values());
                 int resStatusPreference = Verification.inputVerification(ResidentialStatus.values().length);
                 ResidentialStatus residentialStatus = ResidentialStatus.values()[resStatusPreference - 1];
@@ -60,8 +60,8 @@ public class Profile {
                 Admin newAdmin = new Admin(mailId, name, bloodGroup, address, phoneNumber, employeeId, dateOfJoining);
                 db.addNewAdmin(mailId, newAdmin);
             }
-            System.out.println("created ur profile successfully");
-            System.out.println("do you want to continue and move to menu page(y/n)");
+            System.out.println("Created ur profile successfully");
+            System.out.println("Do you want to continue and move to menu page(y/n)");
             if (Verification.yesOrNoVerification().equals("y")) {
                 menuObj.menu(mailId);
             }
@@ -77,20 +77,20 @@ public class Profile {
     public void editProfile(String mailId) throws IOException {
         editProfileMenuLoop:
         while (true) {
-            System.out.println("choose category which u want to edit:");
+            System.out.println("Choose category which u want to edit:");
             UtilFunction.printOptions(EditProfileOptions.values());
             int input = Verification.inputVerification(EditProfileOptions.values().length);
             EditProfileOptions preference=EditProfileOptions.values()[input-1];
             switch (preference) {
                 case ADDRESS:
                     String attribute = "address";
-                    System.out.println("enter ur new address");
+                    System.out.println("Enter ur new address");
                     String newAddress = Verification.addressVerification();
                     db.editData(mailId, attribute, newAddress);
                     break;
                 case PHONE_NUMBER:
                     attribute = "phoneNumber";
-                    System.out.println("enter ur new phone number");
+                    System.out.println("Enter ur new phone number");
                     String newPhoneNumber = Verification.phoneNumVerification();
                     db.editData(mailId, attribute, newPhoneNumber);
                     break;

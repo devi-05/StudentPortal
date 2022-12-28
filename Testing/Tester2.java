@@ -17,6 +17,10 @@ enum days {
 
 public class Tester2 {
 
+    public boolean sample() {
+        return true;
+    }
+
 
     public static void main(String[] args) {
         days[] arr=days.values();

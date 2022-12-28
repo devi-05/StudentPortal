@@ -15,7 +15,7 @@ public class Verification {
         if (mailId.matches("[a-z0-9.]+@(student|admin).in")) {
             return mailId;
         } else {
-            System.out.println("enter mail id which contains alphanumeric characters and special character(.) is included and ends with student or admin .in");
+            System.out.println("Enter mail id which contains alphanumeric characters and special character(.) is included and ends with student or admin .in");
             return mailVerification();
         }
     }
@@ -25,7 +25,7 @@ public class Verification {
         if (password.matches("[A-Za-z1-9@]{2,15}")) {
             return password;
         } else {
-            System.out.println("enter password using alphanumeric characters and special character (@) is allowed and it should be between 2 to 15 characters");
+            System.out.println("Enter password using alphanumeric characters and special character (@) is allowed and it should be between 2 to 15 characters");
             return passwordVerification();
         }
     }
@@ -40,7 +40,7 @@ public class Verification {
         if (name.matches("[A-Za-z]+[-.][A-Za-z]{1,15}")) {
             return name.substring(0, 1).toUpperCase() + name.substring(1);
         } else {
-            System.out.println("name should be in above format and should contain 5 to 15 alphabets !!!!");
+            System.out.println("Name should be in above format and should contain 5 to 15 alphabets !!!!");
             return nameVerification();
         }
     }
@@ -50,7 +50,7 @@ public class Verification {
         if (input.matches("[0-9]{10}")) {
             return input;
         } else {
-            System.out.println("enter proper phone number with 10 digits");
+            System.out.println("Enter proper phone number with 10 digits");
             return phoneNumVerification();
         }
 
@@ -62,7 +62,7 @@ public class Verification {
         if (input.matches("[A-Za-z\s,-.0-9]{5,50}")) {
             return input;
         } else {
-            System.out.println("enter proper address with at least 5 to 50 alphanumeric characters");
+            System.out.println("Enter proper address with at least 5 to 50 alphanumeric characters");
             return addressVerification();
         }
     }
@@ -90,7 +90,7 @@ public class Verification {
         if (input.matches("[y|n]")) {
             return input;
         } else {
-            System.out.println("enter input y or n");
+            System.out.println("Enter input y or n");
             return yesOrNoVerification();
         }
     }
@@ -100,7 +100,7 @@ public class Verification {
         if (input.matches("[a-zA-Z\s?]+")) {
             return input;
         } else {
-            System.out.println("enter alphanumeric characters)");
+            System.out.println("Enter alphanumeric characters)");
             return semesterSubjectVerification();
         }
     }
@@ -110,7 +110,7 @@ public class Verification {
         if (input.matches("[0-9]+?") && (Integer.parseInt(input) <= noOfOptions)) {
             return Integer.parseInt(input);
         } else {
-            System.out.println("enter options between 1 and " + noOfOptions);
+            System.out.println("Enter options between 1 and " + noOfOptions);
             return inputVerification(noOfOptions);
         }
 

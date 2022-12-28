@@ -9,24 +9,24 @@ public class MainMenu {
     public void menu(String mailId) throws IOException {
         menuLoop:
         while (true) {
-            System.out.println("enter ur preference in sign in page");
+            System.out.println("Enter ur preference in sign in page");
             UtilFunction.printOptions(Menu.values());
-            System.out.println("enter ur preference:");
+            System.out.println("Enter ur preference:");
             int input = Verification.inputVerification(Menu.values().length);
             Menu preference=Menu.values()[input-1];
             switch (preference) {
                 case PROFILE_PAGE -> {
-                    System.out.println("welcome to profile page");
+                    System.out.println("Welcome to profile page");
                     ProfileMenu profile = new ProfileMenu();
                     profile.profileOption(mailId);
                 }
                 case FEE_PORTAL -> {
-                    System.out.println("welcome to fee portal");
+                    System.out.println("Welcome to fee portal");
                     Fees fees = new Fees();
                     fees.payService(mailId);
                 }
                 case RESULT_PORTAL -> {
-                    System.out.println("welcome to result portal");
+                    System.out.println("Welcome to result portal");
                     Result result = new Result();
                     result.results(mailId);
                 }

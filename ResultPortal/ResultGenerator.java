@@ -7,41 +7,41 @@ import Helper.Verification;
 import java.util.*;
 
 public class ResultGenerator {
-    Database db = Database.getInstance();
+    private final Database db = Database.getInstance();
 
     public void addResults(String mailId) {
         List<String> Subjects = new ArrayList<>();
         List<Integer> Credits = new ArrayList<>();
         List<GradeValues> Grades = new ArrayList<>();
         List<Double> GradePoints = new ArrayList<>();
-        System.out.println("enter semester number:");
+        System.out.println("Enter semester number:");
         int semNum = Verification.inputVerification(8);
         if (db.getSemesterAdded(mailId) == null) {
             while (semNum != 1) {
-                System.out.println("enter first semester results");
+                System.out.println("Enter first semester results");
                 semNum = Verification.inputVerification(8);
             }
         }
         if (db.getSemesterAdded(mailId) != null) {
             while ((db.getSemesterAdded(mailId) + 1) != (semNum)) {
-                System.out.println("enter correct semester number");
+                System.out.println("Enter correct semester number");
                 semNum = Verification.inputVerification(8);
             }
         }
         if (!db.getSemNumber(mailId, semNum)) {
             db.addSemesters(mailId, semNum);
-            System.out.println("enter number of subjects of that semester:");
+            System.out.println("Enter number of subjects of that semester:");
             int subNum = Verification.inputVerification(8);
             int totalCreditsSum = 0;
             for (int i = 0; i < subNum; i++) {
-                System.out.println("enter subject name:");
+                System.out.println("Enter subject name:");
                 String subject = Verification.semesterSubjectVerification();
                 Subjects.add(subject);
-                System.out.println("enter credits: [1 to 5]");
+                System.out.println("Enter credits: [1 to 5]");
                 int subCredit = Verification.inputVerification(5);
                 totalCreditsSum += subCredit;
                 Credits.add(subCredit);
-                System.out.println("enter grades:");
+                System.out.println("Enter grades:");
                 UtilFunction.printOptions(GradeValues.values());
                 int gradePreference = Verification.inputVerification(5);
                 GradeValues grades = GradeValues.values()[gradePreference - 1];
@@ -63,7 +63,7 @@ public class ResultGenerator {
             double gpa = (grade) / ((double) totalCreditsSum);
             db.addGpa(mailId, semNum, Double.parseDouble(String.format("%.2f", gpa)));
         } else {
-            System.out.println("results were added!!!!");
+            System.out.println("Results were added!!!!");
             addResults(mailId);
         }
     }

@@ -14,7 +14,7 @@ public class MainApp {
         mainLoop:
         while (true) {
             UtilFunction.printOptions(PortalOptions.values());
-            System.out.println("enter ur preference :");
+            System.out.println("Enter ur preference :");
             int input = Verification.inputVerification(PortalOptions.values().length);
             PortalOptions preference=PortalOptions.values()[input-1];
             switch (preference) {

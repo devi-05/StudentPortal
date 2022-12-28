@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class ProfileMenu {
-    Database db = Database.getInstance();
+    private final Database db = Database.getInstance();
 
     public void profileOption(String mailId) throws IOException {
         Profile profile = new Profile();
@@ -18,11 +18,11 @@ public class ProfileMenu {
         while (true) {
             if (Verification.isStudent(mailId)) {
                 UtilFunction.printOptions(Arrays.copyOf(ProfileMenuOptions.values(), ProfileMenuOptions.values().length - 2));
-                System.out.println("enter ur preference:");
+                System.out.println("Enter ur preference:");
                 input = Verification.inputVerification(ProfileMenuOptions.values().length-2);
             } else {
                 UtilFunction.printOptions(ProfileMenuOptions.values());
-                System.out.println("enter ur preference:");
+                System.out.println("Enter ur preference:");
                 input = Verification.inputVerification(ProfileMenuOptions.values().length);
             }
             ProfileMenuOptions preference=ProfileMenuOptions.values()[input-1];
@@ -33,29 +33,29 @@ public class ProfileMenu {
                 case VIEW_OWN_PROFILE -> profile.viewProfile(mailId);
                 case EDIT_OWN_PROFILE -> profile.editProfile(mailId);
                 case VIEW_STUDENT_PROFILE -> {
-                    System.out.println("enter student mailID:");
+                    System.out.println("Enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 
                     if (!Verification.isStudent(studentMailId)) {
-                        System.out.println("enter student mailId");
+                        System.out.println("Enter student mailId");
                         studentMailId = Verification.mailVerification();
                     }
                     if (!db.getId(studentMailId)) {
-                        System.out.println("student doesn't exist");
+                        System.out.println("Student doesn't exist");
                     } else {
                         profile.viewProfile(studentMailId);
                     }
                 }
                 case EDIT_STUDENT_PROFILE -> {
-                    System.out.println("enter student mailID:");
+                    System.out.println("Enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 
                     if (!Verification.isStudent(studentMailId)) {
-                        System.out.println("enter student mailId");
+                        System.out.println("Enter student mailId");
                         studentMailId = Verification.mailVerification();
                     }
                     if (!db.getId(studentMailId)) {
-                        System.out.println("student doesn't exist");
+                        System.out.println("Student doesn't exist");
                     } else {
                         profile.editProfile(studentMailId);
                     }
