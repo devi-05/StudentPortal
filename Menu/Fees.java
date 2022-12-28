@@ -13,12 +13,12 @@ public class Fees {
         feeMenuLoop:
         while (true) {
             if (Verification.isStudent(mailId)) {
-                List<String> studentFeesOption = Arrays.asList("back to menu page","view balance", "pay");
+                List<String> studentFeesOption = Arrays.asList("back to menu page", "view balance", "pay");
                 Verification.printOptions(studentFeesOption);
                 System.out.println("enter ur preference");
                 inputPreference = Verification.inputVerification(3);
             } else {
-                List<String> adminFeesOption = Arrays.asList("back to menu page","view student balance");
+                List<String> adminFeesOption = Arrays.asList("back to menu page", "view student balance");
                 Verification.printOptions(adminFeesOption);
                 System.out.println("enter ur preference");
                 inputPreference = Verification.inputVerification(2);
