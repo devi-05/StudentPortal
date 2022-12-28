@@ -76,43 +76,6 @@ public class Verification {
         return Integer.parseInt(formattedYear);
     }
 
-//    public static String empDojVerification() {
-//        String input = s.next();
-//        List<String>monthsWithThirtyOneDaysList= Arrays.asList("JAN", "MAR", "MAY", "JUL", "AUG", "OCT", "DEC");
-//        List<String>monthsWithThirtyDaysList= Arrays.asList("APR","JUN","SEP","NOV");
-//        if (input.matches("([0-9]{1,2}-(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)-[1-2][0-9]{3})")) {
-//            String[] splitEmpDoj = input.split("-");
-//            int number ;
-//            String string = (splitEmpDoj[1].toUpperCase());
-//            if(monthsWithThirtyOneDaysList.contains(string)){
-//                number=31;
-//            }
-//            else if (monthsWithThirtyDaysList.contains(string)){
-//                number=30;
-//            }
-//            else {
-//                number=29;
-//            }
-//            LocalDate date = LocalDate.now();
-//            DateTimeFormatter formatterYear = DateTimeFormatter.ofPattern("yyyy");
-//            DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd");
-//            String formattedDate=date.format(formatterDate);
-//            String formattedYear = date.format(formatterYear);
-//            if (number < Integer.parseInt(splitEmpDoj[0]) || Integer.parseInt(splitEmpDoj[0]) > Integer.parseInt(formattedDate)) {
-//                System.out.println("enter correct date");
-//                return empDojVerification();
-//            }
-//            if (Integer.parseInt(splitEmpDoj[2]) > Integer.parseInt(formattedYear)) {
-//                System.out.println("entered year is beyond current date");
-//                return empDojVerification();
-//            }
-//        } else {
-//            System.out.println("enter in correct format");
-//            return empDojVerification();
-//        }
-//        return input;
-//    }
-
     public static long amountVerification() {
         long input = s.nextLong();
         if (String.valueOf(input).matches("[0-9]{3,6}")) {
@@ -159,6 +122,17 @@ public class Verification {
             System.out.println((i + 1) + "." + list.get(i));
         }
     }
+
+    public static void getWelcomeMessage(String mailId) {
+        String splitName = mailId.split("@")[1];
+        String user = splitName.split("\\.")[0];
+        if (user.equals("student")) {
+            System.out.println("welcome to the portal......u logged in as STUDENT");
+        } else {
+            System.out.println("welcome to the portal......u logged in as ADMIN");
+        }
+    }
+
 
 
 }

@@ -55,6 +55,7 @@ public class StudentPortal implements Portal {
 
                 }
             }
+            Verification.getWelcomeMessage(mailId);
             menuObj.menu(mailId);
         }
     }
