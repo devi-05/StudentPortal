@@ -12,6 +12,7 @@ public class Result {
         int inputPreference;
         resultPageMenuLoop:
         while (true) {
+            System.out.println("Welcome to result portal");
             if (Verification.isStudent(mailId)) {
                 UtilFunction.printOptions(Arrays.copyOf(ResultMenu.values(), ResultMenu.values().length - 1));
                 System.out.println("Enter ur preference:");

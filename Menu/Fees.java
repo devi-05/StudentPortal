@@ -12,6 +12,7 @@ public class Fees {
         int inputPreference;
         feeMenuLoop:
         while (true) {
+            System.out.println("Welcome to fee portal");
             if (!Verification.isStudent(mailId)) {
                 UtilFunction.printOptions(Arrays.copyOf(FeeMenu.values(), FeeMenu.values().length - 1));
                 System.out.println("Enter ur preference");

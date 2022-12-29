@@ -16,17 +16,14 @@ public class MainMenu {
             Menu preference=Menu.values()[input-1];
             switch (preference) {
                 case PROFILE_PAGE -> {
-                    System.out.println("Welcome to profile page");
                     ProfileMenu profile = new ProfileMenu();
                     profile.profileOption(mailId);
                 }
                 case FEE_PORTAL -> {
-                    System.out.println("Welcome to fee portal");
                     Fees fees = new Fees();
                     fees.payService(mailId);
                 }
                 case RESULT_PORTAL -> {
-                    System.out.println("Welcome to result portal");
                     Result result = new Result();
                     result.results(mailId);
                 }

@@ -16,6 +16,7 @@ public class ProfileMenu {
         int input;
         profileMenuLoop:
         while (true) {
+            System.out.println("Welcome to profile page");
             if (Verification.isStudent(mailId)) {
                 UtilFunction.printOptions(Arrays.copyOf(ProfileMenuOptions.values(), ProfileMenuOptions.values().length - 2));
                 System.out.println("Enter ur preference:");
