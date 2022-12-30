@@ -1,13 +1,13 @@
 package ResultPortal;
 
 import Helper.UtilFunction;
-import PortalDatabase.Database;
+import Database.PortalDatabase;
 import Helper.Verification;
 
 import java.util.*;
 
 public class ResultGenerator {
-    private final Database db = Database.getInstance();
+    private final PortalDatabase db = PortalDatabase.getInstance();
 
     public void addResults(String mailId) {
         List<String> Subjects = new ArrayList<>();

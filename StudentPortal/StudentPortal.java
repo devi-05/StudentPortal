@@ -3,17 +3,18 @@ package StudentPortal;
 import AccountService.Account;
 import Helper.UtilFunction;
 import Menu.MainMenu;
-import PortalDatabase.Database;
+import Database.PortalDatabase;
 import ProfilePage.Profile;
 import Helper.Verification;
 
 import java.io.IOException;
 
-public class StudentPortal implements Portal {
-    private final Database db = Database.getInstance();
+public class StudentPortal extends Profile implements Portal  {
+    private final PortalDatabase db = PortalDatabase.getInstance();
     private final Account ac = new Account();
-    private final Profile profile = new Profile();
     private final MainMenu menuObj = new MainMenu();
+    Profile profile=new Profile();
+    //StudentPortal studentPortal=new StudentPortal();
 
     @Override
     public void signUp() throws IOException {
@@ -64,7 +65,7 @@ public class StudentPortal implements Portal {
 
     @Override
     public void SignOut() {
-        menuObj.SignOut();
+        System.out.println("Signing out....");
     }
 
 }

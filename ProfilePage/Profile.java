@@ -2,17 +2,17 @@ package ProfilePage;
 
 import Helper.UtilFunction;
 import Menu.MainMenu;
-import PortalDatabase.Database;
+import Database.PortalDatabase;
+import Database.ProfileDatabase;
 import PortalUsers.Admin;
 import PortalUsers.Student;
 import Helper.Verification;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Profile {
-    private final Database db = Database.getInstance();
+    private final ProfileDatabase db = PortalDatabase.getInstance();
     private final MainMenu menuObj = new MainMenu();
 
     public void createProfile(String mailId) throws IOException {

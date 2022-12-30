@@ -1,36 +1,22 @@
-package Menu;
+package AdminUi;
 
 import Helper.UtilFunction;
 import Helper.Verification;
-import PortalDatabase.Database;
+import Database.PortalDatabase;
+import Database.MailIdDatabase;
 import ProfilePage.Profile;
 
 import java.io.IOException;
-import java.util.Arrays;
 
-public class ProfileMenu {
-    private final Database db = Database.getInstance();
-
-    public void profileOption(String mailId) throws IOException {
-        Profile profile = new Profile();
-        int input;
-        profileMenuLoop:
-        while (true) {
-            System.out.println("Welcome to profile page");
-            if (Verification.isStudent(mailId)) {
-                UtilFunction.printOptions(Arrays.copyOf(ProfileMenuOptions.values(), ProfileMenuOptions.values().length - 2));
-                System.out.println("Enter ur preference:");
-                input = Verification.inputVerification(ProfileMenuOptions.values().length-2);
-            } else {
-                UtilFunction.printOptions(ProfileMenuOptions.values());
-                System.out.println("Enter ur preference:");
-                input = Verification.inputVerification(ProfileMenuOptions.values().length);
-            }
-            ProfileMenuOptions preference=ProfileMenuOptions.values()[input-1];
-            switch (preference) {
-                case BACK_TO_MENU_PAGE -> {
-                    break profileMenuLoop;
-                }
+public class AdminProfilePage {
+    private final MailIdDatabase db= PortalDatabase.getInstance();
+    public void getAdminProfilePage(String mailId) throws IOException {
+        Profile profile=new Profile();
+        AdminProfileMenuLoop:while (true){
+            UtilFunction.printOptions(AdminProfileMenu.values());
+            int input= Verification.inputVerification(AdminProfileMenu.values().length);
+            AdminProfileMenu preference=AdminProfileMenu.values()[input-1];
+            switch (preference){
                 case VIEW_OWN_PROFILE -> profile.viewProfile(mailId);
                 case EDIT_OWN_PROFILE -> profile.editProfile(mailId);
                 case VIEW_STUDENT_PROFILE -> {
@@ -61,12 +47,11 @@ public class ProfileMenu {
                         profile.editProfile(studentMailId);
                     }
                 }
-
-
+                case BACK_TO_MENU_PAGE -> {
+                    break AdminProfileMenuLoop;
+                }
             }
-
+            }
         }
-
     }
-}
 

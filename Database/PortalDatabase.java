@@ -1,4 +1,4 @@
-package PortalDatabase;
+package Database;
 
 import PortalUsers.Admin;
 import PortalUsers.Student;
@@ -9,8 +9,8 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Database {
-    private static Database db = null;
+public class PortalDatabase implements AccountDatabase, FeeDatabase, MailIdDatabase, ProfileDatabase, ResultDatabase {
+    private static PortalDatabase db = null;
     private final Map<String, String> mailAndPassword = new HashMap<>();
     private final Map<String, Student> studentDetails = new HashMap<>();
     private final Map<String, Admin> adminDetails = new HashMap<>();
@@ -21,12 +21,12 @@ public class Database {
     private final Map<String, Map<Integer, Double>> studentGpaDatabase = new HashMap<>();
     private final Map<String, Double> studentCgpaDatabase = new HashMap<>();
 
-    private Database() {
+    private PortalDatabase() {
     }
 
-    public static Database getInstance() {
+    public static PortalDatabase getInstance() {
         if (db == null) {
-            db = new Database();
+            db = new PortalDatabase();
         }
         return db;
     }

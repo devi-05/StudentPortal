@@ -1,6 +1,6 @@
-package Menu;
+package StudentUi;
 
-public enum FeeMenu {
+public enum StudentFeeMenu {
     BACK_TO_MENU_PAGE,
     VIEW_BALANCE,
     PAY;

@@ -1,17 +1,20 @@
 package ResultPortal;
 
-import PortalDatabase.Database;
+import Database.PortalDatabase;
 import Helper.Verification;
+import Database.MailIdDatabase;
+import Database.ResultDatabase;
 
 public class ExamResultManagement {
     private final ResultGenerator resultGenerator = new ResultGenerator();
-    private final Database db = Database.getInstance();
+    private final ResultDatabase db = PortalDatabase.getInstance();
+    private final MailIdDatabase dbId= PortalDatabase.getInstance();
 
-    public void addResult() {
+    protected void addResult() {
         System.out.println("Enter student mailId");
         String mailId = Verification.mailVerification();
         if (Verification.isStudent(mailId)) {
-            if (!db.getId(mailId)) {
+            if (!dbId.getId(mailId)) {
                 System.out.println("Student doesn't exist");
             } else {
                 resultGenerator.addResults(mailId);
@@ -26,7 +29,7 @@ public class ExamResultManagement {
         System.out.println("Enter student mailId");
         String mailId = Verification.mailVerification();
         if (Verification.isStudent(mailId)) {
-            if (!db.getId(mailId)) {
+            if (!dbId.getId(mailId)) {
                 System.out.println("Student doesn't exist");
             } else {
                 System.out.println("Enter semester number");
@@ -49,7 +52,7 @@ public class ExamResultManagement {
         System.out.println("Enter mailId:");
         String mailId = Verification.mailVerification();
         if (Verification.isStudent(mailId)) {
-            if (!db.getId(mailId)) {
+            if (!dbId.getId(mailId)) {
                 System.out.println("Student doesn't exist");
             } else {
                 if (db.getMailForResults(mailId)) {
@@ -70,7 +73,7 @@ public class ExamResultManagement {
         System.out.println("Enter mail id:");
         String mailId = Verification.mailVerification();
         if (Verification.isStudent(mailId)) {
-            if (!db.getId(mailId)) {
+            if (!dbId.getId(mailId)) {
                 System.out.println("Student doesn't exist");
             } else {
                 if (db.getEntireSemResult(mailId) != null) {

@@ -2,13 +2,16 @@ package FeePortal;
 
 import Helper.UtilFunction;
 import Helper.Verification;
-import PortalDatabase.Database;
+import Database.PortalDatabase;
+import Database.FeeDatabase;
+import Database.MailIdDatabase;
 import ProfilePage.Department;
 
 public class PaymentService {
-    private final Database db = Database.getInstance();
+    private final FeeDatabase db = PortalDatabase.getInstance();
+    private final MailIdDatabase dbId= PortalDatabase.getInstance();
 
-    public void pay(String mailId) {
+    protected void pay(String mailId) {
         boolean user = Verification.isStudent(mailId);
         double convenienceFees = 0;
         long feesTobePaid;
@@ -49,7 +52,7 @@ public class PaymentService {
             System.out.println("Enter student mail id:");
             mailId = Verification.mailVerification();
         }
-        while (!db.getId(mailId)) {
+        while (!dbId.getId(mailId)) {
             System.out.println("MailId doesn't exist");
             System.out.println("Do u want to continue in view balance page(y/n)");
             if (Verification.yesOrNoVerification().equals("n")) {
@@ -58,14 +61,14 @@ public class PaymentService {
             System.out.println("Enter mailId");
             mailId = Verification.mailVerification();
         }
-        if (db.getId(mailId)) {
+        if (dbId.getId(mailId)) {
             System.out.println("Name : " + db.getName(mailId) + "\nMail id:" + mailId + "\nRoll number:" + db.getRollNum(mailId) + "\ndepartment:" + db.getDepartment(mailId) + "\nFee balance:" + db.getTotalFees(mailId));
         }
 
 
     }
 
-    public void getReceipt(String mailId, String name, String rollNum, Department department, long feesPaid, long totalFees, long amount, PaymentConvenienceFees modeOfPayment) {
+    protected void getReceipt(String mailId, String name, String rollNum, Department department, long feesPaid, long totalFees, long amount, PaymentConvenienceFees modeOfPayment) {
         System.out.println("Payer Details:");
         System.out.println("------------------------------------------");
         System.out.println("MAIL ID:" + mailId + "\nNAME:" + name + "\nROLL NUMBER:" + rollNum + "\nDEPARTMENT:" + department);

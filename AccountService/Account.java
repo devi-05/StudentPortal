@@ -1,15 +1,18 @@
 package AccountService;
 
-import PortalDatabase.Database;
+import Database.AccountDatabase;
+import Database.PortalDatabase;
 import Helper.Verification;
+import Database.MailIdDatabase;
 
 public class Account {
-    private final Database db = Database.getInstance();
+    private final AccountDatabase db = PortalDatabase.getInstance();
+    private final MailIdDatabase dbId= PortalDatabase.getInstance();
     private String password;
 
     public String createAccount(String mailId) {
 
-        if (db.getId(mailId)) {
+        if (dbId.getId(mailId)) {
             System.out.println("Already existing user");
             System.out.println("Please sign in!!!!");
         } else {
