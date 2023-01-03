@@ -18,7 +18,6 @@ public class PaymentService {
             feesTobePaid = db.getTotalFees(mailId);
             feesPaid = db.getFeesPaid(mailId);
             System.out.println("Fees to be paid : " + feesTobePaid);
-
             System.out.println("Fees Paid : " + feesPaid);
 
             System.out.println("Choose mode of payment:");
