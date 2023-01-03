@@ -17,13 +17,13 @@ public class Fees {
                 UtilFunction.printOptions(adminFeeMenus);
                 System.out.println("Enter ur preference");
                 inputPreference = Verification.inputVerification(adminFeeMenus.length);
-                 preference=StudentFeeMenu.values()[inputPreference-1];
+                 preference=adminFeeMenus[inputPreference-1];
             } else {
                 StudentFeeMenu[] studentFeeMenus=StudentFeeMenu.values();
                 UtilFunction.printOptions(studentFeeMenus);
                 System.out.println("Enter ur preference");
                 inputPreference = Verification.inputVerification(studentFeeMenus.length);
-                preference=AdminFeeMenu.values()[inputPreference-1];
+                preference=studentFeeMenus[inputPreference-1];
             }
             switch (String.valueOf(preference)) {
                 case "BACK_TO_MENU_PAGE" -> {
