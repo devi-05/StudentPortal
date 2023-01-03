@@ -4,31 +4,33 @@ import FeePortal.PaymentService;
 import Helper.UtilFunction;
 import Helper.Verification;
 
-import java.util.Arrays;
-
 public class Fees {
     public void payService(String mailId) {
         PaymentService payService = new PaymentService();
         int inputPreference;
+        Enum preference;
         feeMenuLoop:
         while (true) {
             System.out.println("Welcome to fee portal");
             if (!Verification.isStudent(mailId)) {
-                UtilFunction.printOptions(Arrays.copyOf(FeeMenu.values(), FeeMenu.values().length - 1));
+                AdminFeeMenu[] adminFeeMenus=AdminFeeMenu.values();
+                UtilFunction.printOptions(adminFeeMenus);
                 System.out.println("Enter ur preference");
-                inputPreference = Verification.inputVerification(FeeMenu.values().length-1);
+                inputPreference = Verification.inputVerification(adminFeeMenus.length);
+                 preference=StudentFeeMenu.values()[inputPreference-1];
             } else {
-                UtilFunction.printOptions(FeeMenu.values());
+                StudentFeeMenu[] studentFeeMenus=StudentFeeMenu.values();
+                UtilFunction.printOptions(studentFeeMenus);
                 System.out.println("Enter ur preference");
-                inputPreference = Verification.inputVerification(FeeMenu.values().length);
+                inputPreference = Verification.inputVerification(studentFeeMenus.length);
+                preference=AdminFeeMenu.values()[inputPreference-1];
             }
-            FeeMenu preference=FeeMenu.values()[inputPreference-1];
-            switch (preference) {
-                case BACK_TO_MENU_PAGE -> {
+            switch (String.valueOf(preference)) {
+                case "BACK_TO_MENU_PAGE" -> {
                     break feeMenuLoop;
                 }
-                case VIEW_BALANCE -> payService.viewBalance(mailId);
-                case PAY -> payService.pay(mailId);
+                case "VIEW_BALANCE" -> payService.viewBalance(mailId);
+                case "PAY" -> payService.pay(mailId);
             }
         }
     }

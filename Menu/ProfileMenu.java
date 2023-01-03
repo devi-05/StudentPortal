@@ -6,7 +6,6 @@ import PortalDatabase.Database;
 import ProfilePage.Profile;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class ProfileMenu {
     private final Database db = Database.getInstance();
@@ -14,26 +13,30 @@ public class ProfileMenu {
     public void profileOption(String mailId) throws IOException {
         Profile profile = new Profile();
         int input;
+        Enum preference;
         profileMenuLoop:
         while (true) {
             System.out.println("Welcome to profile page");
             if (Verification.isStudent(mailId)) {
-                UtilFunction.printOptions(Arrays.copyOf(ProfileMenuOptions.values(), ProfileMenuOptions.values().length - 2));
+                StudentProfileMenuOptions[] studentProfileMenuOptions=StudentProfileMenuOptions.values();
+                UtilFunction.printOptions(studentProfileMenuOptions);
                 System.out.println("Enter ur preference:");
-                input = Verification.inputVerification(ProfileMenuOptions.values().length-2);
+                input = Verification.inputVerification(studentProfileMenuOptions.length);
+                preference=StudentProfileMenuOptions.values()[input-1];
             } else {
-                UtilFunction.printOptions(ProfileMenuOptions.values());
+                AdminProfileMenuOptions[] adminProfileMenuOptions=AdminProfileMenuOptions.values();
+                UtilFunction.printOptions(adminProfileMenuOptions);
                 System.out.println("Enter ur preference:");
-                input = Verification.inputVerification(ProfileMenuOptions.values().length);
+                input = Verification.inputVerification(adminProfileMenuOptions.length);
+                preference=AdminProfileMenuOptions.values()[input-1];
             }
-            ProfileMenuOptions preference=ProfileMenuOptions.values()[input-1];
-            switch (preference) {
-                case BACK_TO_MENU_PAGE -> {
+            switch (String.valueOf(preference)) {
+                case "BACK_TO_MENU_PAGE" -> {
                     break profileMenuLoop;
                 }
-                case VIEW_OWN_PROFILE -> profile.viewProfile(mailId);
-                case EDIT_OWN_PROFILE -> profile.editProfile(mailId);
-                case VIEW_STUDENT_PROFILE -> {
+                case "VIEW_OWN_PROFILE" -> profile.viewProfile(mailId);
+                case "EDIT_OWN_PROFILE" -> profile.editProfile(mailId);
+                case "VIEW_STUDENT_PROFILE" -> {
                     System.out.println("Enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 
@@ -47,7 +50,7 @@ public class ProfileMenu {
                         profile.viewProfile(studentMailId);
                     }
                 }
-                case EDIT_STUDENT_PROFILE -> {
+                case "EDIT_STUDENT_PROFILE" -> {
                     System.out.println("Enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 

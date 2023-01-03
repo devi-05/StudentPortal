@@ -1,6 +1,6 @@
 package Menu;
 
-public enum ProfileMenuOptions {
+public enum AdminProfileMenuOptions {
     BACK_TO_MENU_PAGE,
     VIEW_OWN_PROFILE,
     EDIT_OWN_PROFILE,

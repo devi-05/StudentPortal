@@ -18,11 +18,14 @@ public class PaymentService {
             feesTobePaid = db.getTotalFees(mailId);
             feesPaid = db.getFeesPaid(mailId);
             System.out.println("Fees to be paid : " + feesTobePaid);
+
             System.out.println("Fees Paid : " + feesPaid);
+
             System.out.println("Choose mode of payment:");
-            UtilFunction.printOptions(PaymentConvenienceFees.values());
-            int preference = Verification.inputVerification(PaymentConvenienceFees.values().length);
-            modeOfPayment = PaymentConvenienceFees.values()[preference - 1];
+            PaymentConvenienceFees[] paymentConvenienceFeesArray=PaymentConvenienceFees.values();
+            UtilFunction.printOptions(paymentConvenienceFeesArray);
+            int preference = Verification.inputVerification(paymentConvenienceFeesArray.length);
+            modeOfPayment = paymentConvenienceFeesArray[preference - 1];
             double convenienceFeesPercent = modeOfPayment.getPercentExtra();
             convenienceFees = ((convenienceFeesPercent * db.getTotalFees(mailId)) / 100);
         }

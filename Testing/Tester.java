@@ -1,14 +1,21 @@
 package Testing;
 
 class Tester {
-    Tester2 tester2=new Tester2();
-    boolean sample;
+    enum days {
+        MON(1),
+        TUES(2),
+        WED(3);
+        private final int num;
 
+        days(int num) {
+            this.num = num;
+        }
 
-//    private Tester2 tester2 ;
-//
-    public Tester() {
-        sample = tester2.sample();
+        public int get() {
+            return num;
+        }
+
+    }
     }
 //
 //    public static void main(String[] args) {
@@ -37,7 +44,7 @@ class Tester {
 //        }
 //    }
 
-}
+
 
 
 

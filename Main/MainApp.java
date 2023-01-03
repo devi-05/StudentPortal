@@ -15,8 +15,9 @@ public class MainApp {
         while (true) {
             UtilFunction.printOptions(PortalOptions.values());
             System.out.println("Enter ur preference :");
-            int input = Verification.inputVerification(PortalOptions.values().length);
-            PortalOptions preference=PortalOptions.values()[input-1];
+            PortalOptions[] portalOptionsArray=PortalOptions.values();
+            int input = Verification.inputVerification(portalOptionsArray.length);
+            PortalOptions preference=portalOptionsArray[input-1];
             switch (preference) {
                 case SIGN_UP -> s.signUp();
                 case SIGN_IN -> s.signIn();

@@ -4,33 +4,36 @@ import Helper.UtilFunction;
 import Helper.Verification;
 import ResultPortal.ExamResultManagement;
 
-import java.util.Arrays;
-
 public class Result {
     public void results(String mailId) {
         ExamResultManagement resultManagement = new ExamResultManagement();
         int inputPreference;
+        Enum preference;
         resultPageMenuLoop:
         while (true) {
             System.out.println("Welcome to result portal");
             if (Verification.isStudent(mailId)) {
-                UtilFunction.printOptions(Arrays.copyOf(ResultMenu.values(), ResultMenu.values().length - 1));
+                StudentResultMenu[] studentResultMenus=StudentResultMenu.values();
+                UtilFunction.printOptions(studentResultMenus);
                 System.out.println("Enter ur preference:");
-                inputPreference = Verification.inputVerification(ResultMenu.values().length-1);
+                inputPreference = Verification.inputVerification(studentResultMenus.length);
+                preference=StudentResultMenu.values()[inputPreference-1];
+
             } else {
-                UtilFunction.printOptions(ResultMenu.values());
+                AdminResultMenu[] adminResultMenus=AdminResultMenu.values();
+                UtilFunction.printOptions(adminResultMenus);
                 System.out.println("Enter ur preference:");
-                inputPreference = Verification.inputVerification(ResultMenu.values().length);
+                inputPreference = Verification.inputVerification(adminResultMenus.length);
+                preference=AdminResultMenu.values()[inputPreference-1];
             }
-            ResultMenu preference=ResultMenu.values()[inputPreference-1];
-            switch (preference) {
-                case BACK_TO_MENU_PAGE -> {
+            switch (String.valueOf(preference)) {
+                case "BACK_TO_MENU_PAGE" -> {
                     break resultPageMenuLoop;
                 }
-                case VIEW_SEMESTER_RESULT -> resultManagement.viewCurrentSemResults();
-                case VIEW_ENTIRE_SEM_RESULT-> resultManagement.viewEntireSemResult();
-                case CALCULATE_CGPA-> resultManagement.retrieveCgpa();
-                case ADD_RESULT -> resultManagement.addResult();
+                case "VIEW_SEMESTER_RESULT" -> resultManagement.viewCurrentSemResults();
+                case "VIEW_ENTIRE_SEM_RESULT"-> resultManagement.viewEntireSemResult();
+                case "CALCULATE_CGPA"-> resultManagement.retrieveCgpa();
+                case "ADD_RESULT" -> resultManagement.addResult();
             }
         }
     }

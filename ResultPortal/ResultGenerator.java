@@ -30,23 +30,28 @@ public class ResultGenerator {
         }
         if (!db.getSemNumber(mailId, semNum)) {
             db.addSemesters(mailId, semNum);
+
             System.out.println("Enter number of subjects of that semester:");
             int subNum = Verification.inputVerification(8);
             int totalCreditsSum = 0;
             for (int i = 0; i < subNum; i++) {
+
                 System.out.println("Enter subject name:");
                 String subject = Verification.semesterSubjectVerification();
                 Subjects.add(subject);
+
                 System.out.println("Enter credits: [1 to 5]");
                 int subCredit = Verification.inputVerification(5);
                 totalCreditsSum += subCredit;
                 Credits.add(subCredit);
+
                 System.out.println("Enter grades:");
-                UtilFunction.printOptions(GradeValues.values());
-                int gradePreference = Verification.inputVerification(5);
-                GradeValues grades = GradeValues.values()[gradePreference - 1];
-                Grades.add(GradeValues.valueOf(String.valueOf(grades)));
-                GradePoints.add((double) (subCredit * GradeValues.valueOf(String.valueOf(grades)).getPoint()));
+                GradeValues[] gradeValues=GradeValues.values();
+                UtilFunction.printOptions(gradeValues);
+                int gradePreference = Verification.inputVerification(gradeValues.length);
+                GradeValues grades = gradeValues[gradePreference - 1];
+                Grades.add(grades);
+                GradePoints.add((double) (subCredit * grades.getPoint()));
             }
             db.addTotalCredits(mailId, semNum, totalCreditsSum);
             double grade = 0;

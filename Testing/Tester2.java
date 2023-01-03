@@ -1,8 +1,11 @@
 package Testing;
 
+import java.util.Arrays;
+
 enum days {
     MON(1),
-    TUES(2);
+    TUES(2),
+    WED(3);
     private final int num;
 
     days(int num) {
@@ -16,16 +19,14 @@ enum days {
 }
 
 public class Tester2 {
-
-    public boolean sample() {
-        return true;
+    public static void get(){
+        System.out.println("hiii");
     }
 
 
     public static void main(String[] args) {
         days[] arr=days.values();
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println((i + 1) + "." + arr[i]);
-        }
+        System.out.println(Arrays.toString(Arrays.copyOfRange(arr, 1, 2)));
+        //System.out.println(Arrays.toString(Arrays.copyOf(arr, arr.length - 1)));
     }
 }
