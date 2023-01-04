@@ -73,6 +73,10 @@ public class Student extends User {
         return totalFees;
     }
 
+    public void setTotalFees(long totalFees) {
+        this.totalFees = totalFees;
+    }
+
     public long getFeesPaid() {
         return feesPaid;
     }
@@ -115,9 +119,5 @@ public class Student extends User {
 
     public Modes getModeOfJoining() {
         return modeOfJoining;
-    }
-
-    public void setTotalFees(long totalFees) {
-        this.totalFees=totalFees;
     }
 }

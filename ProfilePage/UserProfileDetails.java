@@ -59,7 +59,7 @@ public class UserProfileDetails {
                 UtilFunction.printOptions(residentialStatuses);
                 int resStatusPreference = Verification.inputVerification(residentialStatuses.length);
                 ResidentialStatus residentialStatus = residentialStatuses[resStatusPreference - 1];
-                totalFees = getCalculatedTotalFees(modeOfJoining.getFees(),transportFees,miscellaneousFees)+residentialStatus.getFees();
+                totalFees = getCalculatedTotalFees(modeOfJoining.getFees(), transportFees, miscellaneousFees) + residentialStatus.getFees();
                 long feesPaid = 0;
                 Student newStudent = new Student(mailId, name, bloodGroup, address, phoneNumber, rollNumber, department, joiningYear, modeOfJoining, residentialStatus, modeOfJoining.getFees(), residentialStatus.getFees(), transportFees, miscellaneousFees, totalFees, feesPaid);
                 db.addNewStudent(mailId, newStudent);
@@ -73,7 +73,8 @@ public class UserProfileDetails {
             }
         }
     }
-    public long getCalculatedTotalFees(long modeOfJoiningFees,long transportFees,long miscellaneousFees){
-        return transportFees + miscellaneousFees+modeOfJoiningFees;
+
+    public long getCalculatedTotalFees(long modeOfJoiningFees, long transportFees, long miscellaneousFees) {
+        return transportFees + miscellaneousFees + modeOfJoiningFees;
     }
 }

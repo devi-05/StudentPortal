@@ -1,9 +1,9 @@
 package PortalDatabase;
 
+import Helper.Verification;
 import PortalUsers.Admin;
 import PortalUsers.Student;
 import ProfilePage.Department;
-import Helper.Verification;
 import ProfilePage.ResidentialStatus;
 import ProfilePage.UserProfileDetails;
 
@@ -90,27 +90,30 @@ public class Database {
         return studentDetails.get(mailId).getDepartment();
     }
 
-    public void updateFees(String mailId,  long feesPaid,long feeBalance) {
+    public void updateFees(String mailId, long feesPaid, long feeBalance) {
         studentDetails.get(mailId).setFeesPaid(feesPaid);
         studentDetails.get(mailId).setFeeBalance(feeBalance);
     }
-    public void setFeeBalance(String mailId,long feeBalance){
+
+    public void setFeeBalance(String mailId, long feeBalance) {
         studentDetails.get(mailId).setFeeBalance(feeBalance);
     }
 
     public long getModeOfJoiningFees(String mailId) {
         return studentDetails.get(mailId).getModeOfJoiningFees();
     }
-    public void setResidentialStatus(String mailId,ResidentialStatus residentialStatus){
+
+    public void setResidentialStatus(String mailId, ResidentialStatus residentialStatus) {
         studentDetails.get(mailId).setResidentialStatus(residentialStatus);
         updateResidentialFees(mailId);
     }
-    public void updateResidentialFees(String mailId){
-        UserProfileDetails userProfileDetails=new UserProfileDetails();
-        long totalFees=userProfileDetails.getCalculatedTotalFees(db.getModeOfJoiningFees(mailId),db.getTransportFees(mailId),db.getMiscellaneousFees(mailId));
+
+    public void updateResidentialFees(String mailId) {
+        UserProfileDetails userProfileDetails = new UserProfileDetails();
+        long totalFees = userProfileDetails.getCalculatedTotalFees(db.getModeOfJoiningFees(mailId), db.getTransportFees(mailId), db.getMiscellaneousFees(mailId));
         studentDetails.get(mailId).setTotalFees(totalFees);
-        long oldFeesBalance=studentDetails.get(mailId).getFeeBalance();
-        studentDetails.get(mailId).setFeeBalance(oldFeesBalance+studentDetails.get(mailId).getTotalFees());
+        long oldFeesBalance = studentDetails.get(mailId).getFeeBalance();
+        studentDetails.get(mailId).setFeeBalance(oldFeesBalance + studentDetails.get(mailId).getTotalFees());
 
     }
 
