@@ -20,7 +20,7 @@ public class Student extends User {
     private long feesPaid;
     private long feeBalance;
 
-    public Student(String mailId, String name, BloodGroup bloodGroup, String address, String phoneNumber, String rollNumber, Department department, int year, Modes mode, ResidentialStatus residentialStatus, long modeOfJoiningFees, long residentialStatusFees, long transportFees, long miscellaneousFees, long totalFees, long feesPaid, long feeBalance) {
+    public Student(String mailId, String name, BloodGroup bloodGroup, String address, String phoneNumber, String rollNumber, Department department, int year, Modes mode, ResidentialStatus residentialStatus, long modeOfJoiningFees, long residentialStatusFees, long transportFees, long miscellaneousFees, long totalFees, long feesPaid) {
         super(mailId, name, bloodGroup, address, phoneNumber);
         this.rollNumber = rollNumber;
         this.department = department;
@@ -73,10 +73,6 @@ public class Student extends User {
         return totalFees;
     }
 
-    public void setTotalFees(long totalFees) {
-        this.totalFees = totalFees;
-    }
-
     public long getFeesPaid() {
         return feesPaid;
     }
@@ -119,5 +115,9 @@ public class Student extends User {
 
     public Modes getModeOfJoining() {
         return modeOfJoining;
+    }
+
+    public void setTotalFees(long totalFees) {
+        this.totalFees=totalFees;
     }
 }

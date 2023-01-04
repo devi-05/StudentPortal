@@ -17,16 +17,18 @@ public class ProfileMenu {
 
         profileMenuLoop:
         while (true) {
-            System.out.println("Welcome to profile page");
+            System.out.println("WELCOME TO PROFILE PAGE");
             if (Verification.isStudent(mailId)) {
                 StudentProfileMenuOptions[] studentProfileMenuOptions = StudentProfileMenuOptions.values();
                 UtilFunction.printOptions(studentProfileMenuOptions);
+
                 System.out.println("Enter ur preference:");
                 input = Verification.inputVerification(studentProfileMenuOptions.length);
                 preference = studentProfileMenuOptions[input - 1];
             } else {
                 AdminProfileMenuOptions[] adminProfileMenuOptions = AdminProfileMenuOptions.values();
                 UtilFunction.printOptions(adminProfileMenuOptions);
+
                 System.out.println("Enter ur preference:");
                 input = Verification.inputVerification(adminProfileMenuOptions.length);
                 preference = adminProfileMenuOptions[input - 1];
@@ -55,16 +57,10 @@ public class ProfileMenu {
                 }
                 case "EDIT_STUDENT_PROFILE" -> {
                     System.out.println("Enter student mailID:");
-                    String studentMailId = Verification.mailVerification();
-
-                    while (!Verification.isStudent(studentMailId)) {
-                        System.out.println("Enter student mailId");
-                        studentMailId = Verification.mailVerification();
-                    }
-                    if (!db.getId(studentMailId)) {
+                    if (!db.getId(mailId)) {
                         System.out.println("Student doesn't exist");
                     } else {
-                        profile.editProfile(studentMailId);
+                        profile.editProfile(mailId);
                     }
                 }
 

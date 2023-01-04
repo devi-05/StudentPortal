@@ -2,10 +2,10 @@ package StudentPortal;
 
 import AccountService.Account;
 import Helper.UtilFunction;
-import Helper.Verification;
 import Menu.MainMenu;
 import PortalDatabase.Database;
 import ProfilePage.Profile;
+import Helper.Verification;
 
 import java.io.IOException;
 
@@ -33,7 +33,8 @@ public class StudentPortal implements Portal {
             if (Verification.yesOrNoVerification().equals("n")) {
                 setStatus = "No";
                 break;
-            } else {
+            }
+            else {
                 System.out.println("Enter mailId:");
                 mailId = Verification.mailVerification();
             }

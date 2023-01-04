@@ -13,7 +13,7 @@ public class Fees {
         Enum preference;
         feeMenuLoop:
         while (true) {
-            System.out.println("Welcome to fee portal");
+            System.out.println("WELCOME TO FEE PAGE");
             if (!Verification.isStudent(mailId)) {
                 AdminFeeMenu[] adminFeeMenus = AdminFeeMenu.values();
                 UtilFunction.printOptions(adminFeeMenus);

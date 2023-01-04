@@ -12,10 +12,11 @@ public class Result {
 
         resultPageMenuLoop:
         while (true) {
-            System.out.println("Welcome to result portal");
+            System.out.println("WELCOME TO RESULT PAGE");
             if (Verification.isStudent(mailId)) {
                 StudentResultMenu[] studentResultMenus = StudentResultMenu.values();
                 UtilFunction.printOptions(studentResultMenus);
+
                 System.out.println("Enter ur preference:");
                 inputPreference = Verification.inputVerification(studentResultMenus.length);
                 preference = studentResultMenus[inputPreference - 1];
@@ -23,6 +24,7 @@ public class Result {
             } else {
                 AdminResultMenu[] adminResultMenus = AdminResultMenu.values();
                 UtilFunction.printOptions(adminResultMenus);
+
                 System.out.println("Enter ur preference:");
                 inputPreference = Verification.inputVerification(adminResultMenus.length);
                 preference = adminResultMenus[inputPreference - 1];

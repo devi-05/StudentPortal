@@ -27,25 +27,28 @@ public class PaymentService {
                 System.out.println("Total fees : " + totalFees);
                 System.out.println("Fee Balance :" + feeBalance);
                 System.out.println("Fee paid :" + feesPaid);
+
                 System.out.println("Choose mode of payment:");
                 PaymentConvenienceFees[] paymentConvenienceFeesArray = PaymentConvenienceFees.values();
                 UtilFunction.printOptions(paymentConvenienceFeesArray);
                 int preference = Verification.inputVerification(paymentConvenienceFeesArray.length);
                 modeOfPayment = paymentConvenienceFeesArray[preference - 1];
+
                 double convenienceFeesPercent = modeOfPayment.getPercentExtra();
                 convenienceFees = (int) (convenienceFeesPercent * feeBalance / 100);
                 System.out.println("convenience fees : " + convenienceFees + "\nFee Balance :" + feeBalance);
                 System.out.println("--------------------------------------------------------");
                 feesToBePaid = (long) (convenienceFees + feeBalance);
+
                 System.out.println(" fees to be paid : " + feesToBePaid);
 
                 System.out.println("Enter amount to pay(HINT: AMOUNT SHOULD BE MINIMUM 100RS)");
                 long amount = Verification.amountVerification(feesToBePaid);
-                //feesTobePaid = (long) (db.getModeOfJoiningFees(mailId) + db.getResidentialStatusFees(mailId) + db.getMiscellaneousFees(mailId) + db.getTransportFees(mailId) + convenienceFees);
                 feeBalance = (feesToBePaid - amount);
                 feesPaid += amount;
                 db.updateFees(mailId, feesPaid, feeBalance);
                 System.out.println("Payment successful!!");
+
                 System.out.println("Need receipt for this payment(y/n)");
                 String input = Verification.yesOrNoVerification();
                 if (input.equals("y")) {

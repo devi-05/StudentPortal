@@ -14,6 +14,7 @@ public class UserProfileDetails {
     private final Database db = Database.getInstance();
 
     public void getUserDetails(String mailId) throws IOException {
+        long totalFees = 0;
         if (mailId != null) {
             System.out.println("Enter your details to create your profile");
             int rollNum = 1;
@@ -44,26 +45,23 @@ public class UserProfileDetails {
 
                 int joiningYear = Verification.StudentJoiningYear();
 
-                long transportFees = 40000;
-                long miscellaneousFees = 45000;
-                long totalFees = transportFees + miscellaneousFees;
+                final long transportFees = 40000;
+                final long miscellaneousFees = 45000;
 
                 System.out.println("Enter mode of joining:");
                 Modes[] modes = Modes.values();
                 UtilFunction.printOptions(modes);
                 int modePreference = Verification.inputVerification(modes.length);
                 Modes modeOfJoining = modes[modePreference - 1];
-                totalFees += modeOfJoining.getFees();
 
                 System.out.println("Enter your residential status");
                 ResidentialStatus[] residentialStatuses = ResidentialStatus.values();
                 UtilFunction.printOptions(residentialStatuses);
                 int resStatusPreference = Verification.inputVerification(residentialStatuses.length);
                 ResidentialStatus residentialStatus = residentialStatuses[resStatusPreference - 1];
-                totalFees += residentialStatus.getFees();
+                totalFees = getCalculatedTotalFees(modeOfJoining.getFees(),transportFees,miscellaneousFees)+residentialStatus.getFees();
                 long feesPaid = 0;
-                long feeBalance = 0;
-                Student newStudent = new Student(mailId, name, bloodGroup, address, phoneNumber, rollNumber, department, joiningYear, modeOfJoining, residentialStatus, modeOfJoining.getFees(), residentialStatus.getFees(), transportFees, miscellaneousFees, totalFees, feesPaid, feeBalance);
+                Student newStudent = new Student(mailId, name, bloodGroup, address, phoneNumber, rollNumber, department, joiningYear, modeOfJoining, residentialStatus, modeOfJoining.getFees(), residentialStatus.getFees(), transportFees, miscellaneousFees, totalFees, feesPaid);
                 db.addNewStudent(mailId, newStudent);
             } else {
                 String employeeId = "A" + rollNum++;
@@ -74,5 +72,8 @@ public class UserProfileDetails {
                 db.addNewAdmin(mailId, newAdmin);
             }
         }
+    }
+    public long getCalculatedTotalFees(long modeOfJoiningFees,long transportFees,long miscellaneousFees){
+        return transportFees + miscellaneousFees+modeOfJoiningFees;
     }
 }
