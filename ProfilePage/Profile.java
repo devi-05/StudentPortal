@@ -9,21 +9,19 @@ import java.io.IOException;
 
 public class Profile {
     private final Database db = Database.getInstance();
-    private final MainMenu menuObj = new MainMenu();
 
     public void createProfile(String mailId) throws IOException {
-       UserProfileDetails userProfileDetails=new UserProfileDetails();
-       userProfileDetails.getUserDetails(mailId);
-            System.out.println("Created ur profile successfully");
-            System.out.println("Do you want to continue and move to menu page(y/n)");
-            if (Verification.yesOrNoVerification().equals("y")) {
-                menuObj.menu(mailId);
-            }
+        UserProfileDetails userProfileDetails = new UserProfileDetails();
+        MainMenu menuObj = new MainMenu();
+        userProfileDetails.getUserDetails(mailId);
+        System.out.println("Created ur profile successfully");
+        System.out.println("Do you want to continue and move to menu page(y/n)");
+        if (Verification.yesOrNoVerification().equals("y")) {
+            menuObj.menu(mailId);
         }
-
+    }
 
     public void viewProfile(String mailId) {
-
         System.out.println(db.getUserData(mailId));
     }
 
@@ -31,9 +29,10 @@ public class Profile {
         editProfileMenuLoop:
         while (true) {
             System.out.println("Choose category which u want to edit:");
-            UtilFunction.printOptions(EditProfileOptions.values());
-            int input = Verification.inputVerification(EditProfileOptions.values().length);
-            EditProfileOptions preference=EditProfileOptions.values()[input-1];
+            EditProfileOptions[] editProfileOptions = EditProfileOptions.values();
+            UtilFunction.printOptions(editProfileOptions);
+            int input = Verification.inputVerification(editProfileOptions.length);
+            EditProfileOptions preference = editProfileOptions[input - 1];
             switch (preference) {
                 case ADDRESS:
                     String attribute = "address";

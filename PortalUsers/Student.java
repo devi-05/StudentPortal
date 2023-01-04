@@ -18,8 +18,9 @@ public class Student extends User {
     private long residentialStatusFees;
     private long totalFees;
     private long feesPaid;
+    private long feeBalance;
 
-    public Student(String mailId, String name, BloodGroup bloodGroup, String address, String phoneNumber, String rollNumber, Department department, int year, Modes mode, ResidentialStatus residentialStatus, long modeOfJoiningFees, long residentialStatusFees, long transportFees, long miscellaneousFees, long totalFees, long feesPaid) {
+    public Student(String mailId, String name, BloodGroup bloodGroup, String address, String phoneNumber, String rollNumber, Department department, int year, Modes mode, ResidentialStatus residentialStatus, long modeOfJoiningFees, long residentialStatusFees, long transportFees, long miscellaneousFees, long totalFees, long feesPaid, long feeBalance) {
         super(mailId, name, bloodGroup, address, phoneNumber);
         this.rollNumber = rollNumber;
         this.department = department;
@@ -32,6 +33,7 @@ public class Student extends User {
         this.miscellaneousFees = miscellaneousFees;
         this.totalFees = totalFees;
         this.feesPaid = feesPaid;
+        this.feeBalance = totalFees - feesPaid;
     }
 
     @Override
@@ -47,6 +49,7 @@ public class Student extends User {
                 "\nResidential Status=" + residentialStatus +
                 "\nTotal fees=" + totalFees +
                 "\nfees paid=" + feesPaid +
+                "\nfees balance=" + feeBalance +
                 "\nbloodGroup=" + getBloodGroup() +
                 "\naddress=" + getAddress() +
                 "\nphoneNumber=" + getPhoneNumber();
@@ -100,6 +103,14 @@ public class Student extends User {
 
     public Department getDepartment() {
         return department;
+    }
+
+    public long getFeeBalance() {
+        return feeBalance;
+    }
+
+    public void setFeeBalance(long feeBalance) {
+        this.feeBalance = feeBalance;
     }
 
     public int getJoiningYear() {

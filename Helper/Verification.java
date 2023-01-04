@@ -59,7 +59,7 @@ public class Verification {
     public static String addressVerification() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String input = bufferedReader.readLine();
-        if (input.matches("[A-Za-z\s,-.0-9]{5,50}")) {
+        if (input.matches("[A-Za-z\\s,-.0-9]{5,50}")) {
             return input;
         } else {
             System.out.println("Enter proper address with at least 5 to 50 alphanumeric characters");
@@ -75,13 +75,21 @@ public class Verification {
         return Integer.parseInt(formattedYear);
     }
 
-    public static long amountVerification() {
+    public static long amountVerification(double amount) {
         long input = s.nextLong();
-        if (String.valueOf(input).matches("[0-9]{3,6}")) {
-            return input;
+        if (String.valueOf(input).matches("[0-9]+")) {
+            if (input < 100) {
+                System.out.println("Enter minimum 100 Rs");
+                return amountVerification(amount);
+            } else if (input > amount) {
+                System.out.println("Enter estimated amount only");
+                return amountVerification(amount);
+            } else {
+                return input;
+            }
         } else {
-            System.out.println("enter  minimum 100");
-            return amountVerification();
+            System.out.println("Enter only digits!!");
+            return amountVerification(amount);
         }
     }
 
@@ -97,7 +105,7 @@ public class Verification {
 
     public static String semesterSubjectVerification() {
         String input = s.next();
-        if (input.matches("[a-zA-Z\s?]+")) {
+        if (input.matches("[a-zA-Z\\s]+")) {
             return input;
         } else {
             System.out.println("Enter alphanumeric characters)");
@@ -107,7 +115,7 @@ public class Verification {
 
     public static int inputVerification(int noOfOptions) {
         String input = s.next();
-        if (input.matches("[0-9]+?") && (Integer.parseInt(input) <= noOfOptions)) {
+        if (input.matches("[0-9]+") && (Integer.parseInt(input) <= noOfOptions)) {
             return Integer.parseInt(input);
         } else {
             System.out.println("Enter options between 1 and " + noOfOptions);
@@ -115,7 +123,6 @@ public class Verification {
         }
 
     }
-
 
 
 }

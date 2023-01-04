@@ -1,7 +1,7 @@
 package ResultPortal;
 
-import PortalDatabase.Database;
 import Helper.Verification;
+import PortalDatabase.Database;
 
 public class ExamResultManagement {
     private final ResultGenerator resultGenerator = new ResultGenerator();
@@ -19,10 +19,10 @@ public class ExamResultManagement {
         } else {
             System.out.println("Enter student mailId");
         }
-
     }
 
     public void viewCurrentSemResults() {
+
         System.out.println("Enter student mailId");
         String mailId = Verification.mailVerification();
         if (Verification.isStudent(mailId)) {
@@ -46,7 +46,7 @@ public class ExamResultManagement {
 
     public void viewEntireSemResult() {
 
-        System.out.println("Enter mailId:");
+        System.out.println("Enter student mailId:");
         String mailId = Verification.mailVerification();
         if (Verification.isStudent(mailId)) {
             if (!db.getId(mailId)) {
@@ -67,13 +67,14 @@ public class ExamResultManagement {
     }
 
     public void retrieveCgpa() {
-        System.out.println("Enter mail id:");
+
+        System.out.println("Enter student mail id:");
         String mailId = Verification.mailVerification();
         if (Verification.isStudent(mailId)) {
             if (!db.getId(mailId)) {
                 System.out.println("Student doesn't exist");
             } else {
-                if (db.getEntireSemResult(mailId) != null) {
+                if (db.getMailForResults(mailId)) {
                     resultGenerator.calculateCgpa(mailId);
                     System.out.println(db.getCgpa(mailId));
                 } else {

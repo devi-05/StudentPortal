@@ -1,22 +1,15 @@
 package Testing;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class Tester {
-    enum days {
-        MON(1),
-        TUES(2),
-        WED(3);
-        private final int num;
-
-        days(int num) {
-            this.num = num;
-        }
-
-        public int get() {
-            return num;
-        }
-
+    public static void main(String[] args) {
+        Pattern p = Pattern.compile("[0-9]+");//. represents single character
+        Matcher m = p.matcher("10");
+        System.out.println(m.matches());
     }
-    }
+}
 //
 //    public static void main(String[] args) {
 ////        Tester t = new Tester();

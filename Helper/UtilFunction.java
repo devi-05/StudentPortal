@@ -8,14 +8,13 @@ public class UtilFunction {
     }
 
     public static void getWelcomeMessage(String mailId) {
-       // String splitName = mailId.split("@")[1];
-       // String user = splitName.split("\\.")[0];
+        // String splitName = mailId.split("@")[1];
+        // String user = splitName.split("\\.")[0];
         //System.out.println("welcome to portal......u logged in as "+user);
-            if (Verification.isStudent(mailId)){
-                System.out.println("welcome to portal......u logged in as student");
-            }
-            else {
-                System.out.println("welcome to portal......u logged in as admin");
-            }
+        if (Verification.isStudent(mailId)) {
+            System.out.println("welcome to portal......u logged in as STUDENT");
+        } else {
+            System.out.println("welcome to portal......u logged in as ADMIN");
+        }
     }
 }

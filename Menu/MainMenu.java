@@ -10,10 +10,11 @@ public class MainMenu {
         menuLoop:
         while (true) {
             System.out.println("Enter ur preference in sign in page");
-            UtilFunction.printOptions(Menu.values());
+            Menu[] menus = Menu.values();
+            UtilFunction.printOptions(menus);
             System.out.println("Enter ur preference:");
-            int input = Verification.inputVerification(Menu.values().length);
-            Menu preference=Menu.values()[input-1];
+            int input = Verification.inputVerification(menus.length);
+            Menu preference = menus[input - 1];
             switch (preference) {
                 case PROFILE_PAGE -> {
                     ProfileMenu profile = new ProfileMenu();
@@ -27,7 +28,7 @@ public class MainMenu {
                     Result result = new Result();
                     result.results(mailId);
                 }
-                case SIGN_OUT-> {
+                case SIGN_OUT -> {
                     SignOut();
                     break menuLoop;
                 }

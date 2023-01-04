@@ -1,7 +1,7 @@
 package AccountService;
 
-import PortalDatabase.Database;
 import Helper.Verification;
+import PortalDatabase.Database;
 
 public class Account {
     private final Database db = Database.getInstance();

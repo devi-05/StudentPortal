@@ -13,11 +13,11 @@ public class MainApp {
         System.out.println("Welcome to student portal!!!!!");
         mainLoop:
         while (true) {
-            UtilFunction.printOptions(PortalOptions.values());
+            PortalOptions[] portalOptionsArray = PortalOptions.values();
+            UtilFunction.printOptions(portalOptionsArray);
             System.out.println("Enter ur preference :");
-            PortalOptions[] portalOptionsArray=PortalOptions.values();
             int input = Verification.inputVerification(portalOptionsArray.length);
-            PortalOptions preference=portalOptionsArray[input-1];
+            PortalOptions preference = portalOptionsArray[input - 1];
             switch (preference) {
                 case SIGN_UP -> s.signUp();
                 case SIGN_IN -> s.signIn();

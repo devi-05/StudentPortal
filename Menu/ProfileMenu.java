@@ -14,33 +14,36 @@ public class ProfileMenu {
         Profile profile = new Profile();
         int input;
         Enum preference;
+
         profileMenuLoop:
         while (true) {
             System.out.println("Welcome to profile page");
             if (Verification.isStudent(mailId)) {
-                StudentProfileMenuOptions[] studentProfileMenuOptions=StudentProfileMenuOptions.values();
+                StudentProfileMenuOptions[] studentProfileMenuOptions = StudentProfileMenuOptions.values();
                 UtilFunction.printOptions(studentProfileMenuOptions);
                 System.out.println("Enter ur preference:");
                 input = Verification.inputVerification(studentProfileMenuOptions.length);
-                preference=StudentProfileMenuOptions.values()[input-1];
+                preference = studentProfileMenuOptions[input - 1];
             } else {
-                AdminProfileMenuOptions[] adminProfileMenuOptions=AdminProfileMenuOptions.values();
+                AdminProfileMenuOptions[] adminProfileMenuOptions = AdminProfileMenuOptions.values();
                 UtilFunction.printOptions(adminProfileMenuOptions);
                 System.out.println("Enter ur preference:");
                 input = Verification.inputVerification(adminProfileMenuOptions.length);
-                preference=AdminProfileMenuOptions.values()[input-1];
+                preference = adminProfileMenuOptions[input - 1];
             }
             switch (String.valueOf(preference)) {
                 case "BACK_TO_MENU_PAGE" -> {
                     break profileMenuLoop;
                 }
                 case "VIEW_OWN_PROFILE" -> profile.viewProfile(mailId);
+
                 case "EDIT_OWN_PROFILE" -> profile.editProfile(mailId);
+
                 case "VIEW_STUDENT_PROFILE" -> {
                     System.out.println("Enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 
-                    if (!Verification.isStudent(studentMailId)) {
+                    while (!Verification.isStudent(studentMailId)) {
                         System.out.println("Enter student mailId");
                         studentMailId = Verification.mailVerification();
                     }
@@ -54,7 +57,7 @@ public class ProfileMenu {
                     System.out.println("Enter student mailID:");
                     String studentMailId = Verification.mailVerification();
 
-                    if (!Verification.isStudent(studentMailId)) {
+                    while (!Verification.isStudent(studentMailId)) {
                         System.out.println("Enter student mailId");
                         studentMailId = Verification.mailVerification();
                     }

@@ -1,10 +1,13 @@
 package ResultPortal;
 
 import Helper.UtilFunction;
-import PortalDatabase.Database;
 import Helper.Verification;
+import PortalDatabase.Database;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.List;
+import java.util.Map;
 
 public class ResultGenerator {
     private final Database db = Database.getInstance();
@@ -14,6 +17,7 @@ public class ResultGenerator {
         List<Integer> Credits = new ArrayList<>();
         List<GradeValues> Grades = new ArrayList<>();
         List<Double> GradePoints = new ArrayList<>();
+
         System.out.println("Enter semester number:");
         int semNum = Verification.inputVerification(8);
         if (db.getSemesterAdded(mailId) == null) {
@@ -30,12 +34,10 @@ public class ResultGenerator {
         }
         if (!db.getSemNumber(mailId, semNum)) {
             db.addSemesters(mailId, semNum);
-
             System.out.println("Enter number of subjects of that semester:");
             int subNum = Verification.inputVerification(8);
             int totalCreditsSum = 0;
             for (int i = 0; i < subNum; i++) {
-
                 System.out.println("Enter subject name:");
                 String subject = Verification.semesterSubjectVerification();
                 Subjects.add(subject);
@@ -46,7 +48,7 @@ public class ResultGenerator {
                 Credits.add(subCredit);
 
                 System.out.println("Enter grades:");
-                GradeValues[] gradeValues=GradeValues.values();
+                GradeValues[] gradeValues = GradeValues.values();
                 UtilFunction.printOptions(gradeValues);
                 int gradePreference = Verification.inputVerification(gradeValues.length);
                 GradeValues grades = gradeValues[gradePreference - 1];
@@ -78,7 +80,6 @@ public class ResultGenerator {
         double cgpaTotalGradePoints = db.getTotalGradePoints(mailId);
         double cgpa = cgpaTotalGradePoints / cgpaTotalCredits;
         db.addCgpa(mailId, Double.parseDouble(String.format("%.2f", cgpa)));
-
     }
 
     public Formatter semResult(String mailId, int semNumber) {

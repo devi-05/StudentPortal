@@ -19,13 +19,13 @@ enum days {
 }
 
 public class Tester2 {
-    public static void get(){
+    public static void get() {
         System.out.println("hiii");
     }
 
 
     public static void main(String[] args) {
-        days[] arr=days.values();
+        days[] arr = days.values();
         System.out.println(Arrays.toString(Arrays.copyOfRange(arr, 1, 2)));
         //System.out.println(Arrays.toString(Arrays.copyOf(arr, arr.length - 1)));
     }

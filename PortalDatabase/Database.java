@@ -1,9 +1,9 @@
 package PortalDatabase;
 
+import Helper.Verification;
 import PortalUsers.Admin;
 import PortalUsers.Student;
 import ProfilePage.Department;
-import Helper.Verification;
 
 import java.util.Formatter;
 import java.util.HashMap;
@@ -88,9 +88,13 @@ public class Database {
         return studentDetails.get(mailId).getDepartment();
     }
 
-    public void updateFees(String mailId, long totalFees, long feesPaid) {
-        studentDetails.get(mailId).setTotalFees(totalFees);
+    public void updateFees(String mailId, long feesPaid, long feeBalance) {
         studentDetails.get(mailId).setFeesPaid(feesPaid);
+        studentDetails.get(mailId).setFeeBalance(feeBalance);
+    }
+
+    public void setFeeBalance(String mailId, long feeBalance) {
+        studentDetails.get(mailId).setFeeBalance(feeBalance);
     }
 
     public long getModeOfJoiningFees(String mailId) {
@@ -116,6 +120,11 @@ public class Database {
     public long getFeesPaid(String mailId) {
         return studentDetails.get(mailId).getFeesPaid();
     }
+
+    public long getFeesBalance(String mailId) {
+        return studentDetails.get(mailId).getFeeBalance();
+    }
+
 
     public void addTotalCredits(String mailId, int semNum, int credits) {
         Map<Integer, Integer> totalCredits = new HashMap<>();
