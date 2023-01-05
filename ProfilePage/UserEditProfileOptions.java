@@ -1,6 +1,6 @@
 package ProfilePage;
 
-public enum StudentEditProfileOptions {
+public enum UserEditProfileOptions {
     ADDRESS,
     PHONE_NUMBER,
     BACK_TO_PROFILE_PAGE;

@@ -40,7 +40,7 @@ public class Verification {
         if (name.matches("[A-Za-z]+[-.][A-Za-z]{1,15}")) {
             return name.substring(0, 1).toUpperCase() + name.substring(1);
         } else {
-            System.out.println("Name should be in above format and should contain 5 to 15 alphabets !!!!");
+            System.out.println("Name should be in above format !!");
             return nameVerification();
         }
     }
@@ -115,7 +115,7 @@ public class Verification {
 
     public static int inputVerification(int noOfOptions) {
         String input = s.next();
-        if (input.matches("[0-9]+") && (Integer.parseInt(input) <= noOfOptions)) {
+        if (input.matches("[1-9]+") && (Integer.parseInt(input) <= noOfOptions)) {
             return Integer.parseInt(input);
         } else {
             System.out.println("Enter options between 1 and " + noOfOptions);

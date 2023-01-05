@@ -112,8 +112,8 @@ public class Database {
         UserProfileDetails userProfileDetails = new UserProfileDetails();
         long totalFees = userProfileDetails.getCalculatedTotalFees(db.getModeOfJoiningFees(mailId), db.getTransportFees(mailId), db.getMiscellaneousFees(mailId));
         studentDetails.get(mailId).setTotalFees(totalFees);
-        long oldFeesBalance = studentDetails.get(mailId).getFeeBalance();
-        studentDetails.get(mailId).setFeeBalance(oldFeesBalance + studentDetails.get(mailId).getTotalFees());
+//        long oldFeesBalance = studentDetails.get(mailId).getFeeBalance();
+//        studentDetails.get(mailId).setFeeBalance(oldFeesBalance + studentDetails.get(mailId).getTotalFees());
 
     }
 

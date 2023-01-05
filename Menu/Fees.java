@@ -38,13 +38,13 @@ public class Fees {
                     String studentMailId = Verification.mailVerification();
                     if (Verification.isStudent(studentMailId)) {
                         if (db.getId(studentMailId)) {
-                            db.setFeeBalance(studentMailId, db.getTotalFees(studentMailId));
+                            db.setFeeBalance(studentMailId, (db.getFeesBalance(studentMailId) + db.getTotalFees(studentMailId)));
                             System.out.println("Fees Updated!!");
                         } else {
                             System.out.println("Student doesn't exist");
                         }
                     } else {
-                        System.out.println("Enter student mailId");
+                        System.out.println("Enter student mailId!!");
                     }
                 }
             }

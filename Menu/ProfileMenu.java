@@ -57,10 +57,15 @@ public class ProfileMenu {
                 }
                 case "EDIT_STUDENT_PROFILE" -> {
                     System.out.println("Enter student mailID:");
-                    if (!db.getId(mailId)) {
+                    String studentMailId = Verification.mailVerification();
+                    while (!Verification.isStudent(studentMailId)) {
+                        System.out.println("Enter student mailId");
+                        studentMailId = Verification.mailVerification();
+                    }
+                    if (!db.getId(studentMailId)) {
                         System.out.println("Student doesn't exist");
                     } else {
-                        profile.editProfile(mailId);
+                        profile.editStudentProfile(studentMailId);
                     }
                 }
 
