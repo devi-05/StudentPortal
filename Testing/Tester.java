@@ -1,13 +1,17 @@
 package Testing;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.HashMap;
 
 class Tester {
     public static void main(String[] args) {
-        Pattern p = Pattern.compile("[0-9]+");//. represents single character
-        Matcher m = p.matcher("10");
-        System.out.println(m.matches());
+        HashMap<String,String>map=new HashMap<>();
+        map.put("devimail","oiuy");
+        map.put("jiji","werty");
+        System.out.println(map);
+        for (String i:map.keySet()){
+            System.out.println(i);
+        }
+
     }
 }
 //

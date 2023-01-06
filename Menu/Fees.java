@@ -34,19 +34,24 @@ public class Fees {
                 case "VIEW_BALANCE" -> payService.viewBalance(mailId);
                 case "PAY" -> payService.pay(mailId);
                 case "UPDATE_STUDENT_FEES" -> {
-                    System.out.println("Enter Student mailId");
-                    String studentMailId = Verification.mailVerification();
-                    if (Verification.isStudent(studentMailId)) {
-                        if (db.getId(studentMailId)) {
-                            db.setFeeBalance(studentMailId, (db.getFeesBalance(studentMailId) + db.getTotalFees(studentMailId)));
-                            System.out.println("Fees Updated!!");
-                        } else {
-                            System.out.println("Student doesn't exist");
-                        }
-                    } else {
-                        System.out.println("Enter student mailId!!");
+                    for (String studentMailId : db.getEntireStudentMailId()) {
+                        db.setFeeBalance(studentMailId, (db.getFeesBalance(studentMailId) + db.getTotalFees(studentMailId)));
                     }
+                    System.out.println("Fees Updated!!");
                 }
+//                    System.out.println("Enter Student mailId");
+//                    String studentMailId = Verification.mailVerification();
+//                    if (Verification.isStudent(studentMailId)) {
+//                        if (db.getId(studentMailId)) {
+//                            db.setFeeBalance(studentMailId, (db.getFeesBalance(studentMailId) + db.getTotalFees(studentMailId)));
+//                            System.out.println("Fees Updated!!");
+//                        } else {
+//                            System.out.println("Student doesn't exist");
+//                        }
+//                    } else {
+//                        System.out.println("Enter student mailId!!");
+//                    }
+
             }
         }
     }

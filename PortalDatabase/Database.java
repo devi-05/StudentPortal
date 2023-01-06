@@ -10,6 +10,7 @@ import ProfilePage.UserProfileDetails;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Database {
     private static Database db = null;
@@ -251,5 +252,8 @@ public class Database {
 
     public boolean getMailForResults(String mailId) {
         return wholeSemesterResult.containsKey(mailId);
+    }
+    public Set<String> getEntireStudentMailId(){
+        return studentDetails.keySet();
     }
 }
